@@ -1,0 +1,127 @@
+﻿<Window x:Class="ProfitApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ProfitApp"
+        xmlns:converter="clr-namespace:ProfitApp.Converters"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <converter:PenniesToDollarsConverter x:Key="PenniesToDollarsConverter" />
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0"
+                Content="Report" Click="Reports_Click"/>
+            <Button Grid.Column="1"
+                Content="Items" Click="Items_Click"/>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid Name="ReportsGrid"
+                  Visibility="Hidden">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <StackPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="Item List"/>
+                        <TextBox Grid.Column="1" Text="{Binding ItemListLocation}"/>
+                        <Button Grid.Column="2" Content="Search Items" Click="SearchItemFolders_Click"/>
+                    </Grid>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="Amazon Report"/>
+                        <TextBox Grid.Column="1" Text="{Binding AmazonFileLocation}"/>
+                        <Button Grid.Column="2" Content="Search Folders" Click="SearchFolders_Click"/>
+                    </Grid>
+                    <Button Content="Upload" Click="UploadReport_Click"/>
+                </StackPanel>
+                <DataGrid Grid.Row="1"
+            Name="dataGridProfit"
+                  ItemsSource="{Binding OrderItems}"
+                  IsReadOnly="True" AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Assigned" Binding="{Binding Assigned}" />
+                        <DataGridTextColumn Header="SKU" Binding="{Binding SKU}" />
+                        <DataGridTextColumn Header="Item Name" Binding="{Binding ItemName}" />
+                        <DataGridTextColumn Header="Order ID" Binding="{Binding OrderID}" />
+                        <DataGridTextColumn Header="Quantity Sold" Binding="{Binding QuantitySold}" />
+                        <DataGridTextColumn Header="Date Sold" Binding="{Binding DateSold}" />
+                        <DataGridTextColumn Header="Bought From" Binding="{Binding BoughtFrom}" />
+                        <DataGridTextColumn Header="Item Cost" Binding="{Binding ItemCost, Converter={StaticResource PenniesToDollarsConverter}}" />
+                        <DataGridTextColumn Header="Sold For" Binding="{Binding SoldFor, Converter={StaticResource PenniesToDollarsConverter}}" />
+                        <DataGridTextColumn Header="Shipping Cost" Binding="{Binding ShippingCost, Converter={StaticResource PenniesToDollarsConverter}}" />
+                        <DataGridTextColumn Header="Selling Fees" Binding="{Binding SellingFees, Converter={StaticResource PenniesToDollarsConverter}}" />
+                        <DataGridTextColumn Header="Profit" Binding="{Binding Profit, Converter={StaticResource PenniesToDollarsConverter}}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="0"
+                Content="Auto Create Items" Click="AutoCreateItems_Click"/>
+                    <Button Grid.Column="1"
+                Content="Auto Assign" Click="AutoAssign_Click"/>
+                </Grid>
+            </Grid>
+            <Grid Name ="ItemsGrid">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Item List"/>
+                    <TextBox Grid.Column="1" Text="{Binding ItemListLocation}"/>
+                    <Button Grid.Column="2" Content="Search Items" Click="SearchItemFolders_Click"/>
+                </Grid>
+                <Button Grid.Row="1" Content="Get Items" Click="GetItem_Click"/>
+                <DataGrid Name="ItemListDataGrid"
+                          Grid.Row="2"
+                          AutoGenerateColumns="False"
+                  ItemsSource="{Binding ItemList}"
+                        CellEditEnding="DataGrid_CellEditEnding">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="SKU" Binding="{Binding SKU}" />
+                        <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
+                        <DataGridTextColumn Header="Amazon SKU" Binding="{Binding AmazonSKU}" />
+                        <DataGridTextColumn Header="Ebay SKU" Binding="{Binding EbaySKU}" />
+                        <DataGridTextColumn Header="Quantity Bought" Binding="{Binding QuantityBought}" />
+                        <DataGridTextColumn Header="Quantity Sold" Binding="{Binding QuantitySold}" />
+                        <DataGridTextColumn Header="Item Cost" Binding="{Binding ItemCost, Converter={StaticResource PenniesToDollarsConverter}}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+                <Button Grid.Row="3" 
+                        Content="Save" Click="Save_Click"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>
