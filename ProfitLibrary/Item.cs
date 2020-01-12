@@ -16,6 +16,7 @@ namespace ProfitLibrary
         private static long item_cost = 4;
         private static int quantity_bought = 5;
         private static int quantity_sold = 6;
+        private static int money_back = 7;
         public string SKU { get; set; }
         public string Name { get; set; }
         public long ItemCost { get; set; }
@@ -55,7 +56,8 @@ namespace ProfitLibrary
                             EbaySKU = values[ebay_sku],
                             ItemCost = long.Parse(values[item_cost]),
                             QuantityBought = int.Parse(values[quantity_bought]),
-                            QuantitySold = int.Parse(values[quantity_sold])
+                            QuantitySold = int.Parse(values[quantity_sold]),
+                            MoneyBack = long.Parse(values[money_back]),
                         };
 
                         itemList.Add(item);

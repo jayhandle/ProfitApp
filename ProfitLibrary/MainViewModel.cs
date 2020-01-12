@@ -112,7 +112,7 @@ namespace ProfitLibrary
 
         public void GetItemListFromFile()
         {
-            ItemList = new ObservableCollection<Item>(Item.GetItemList(ItemListLocation));
+            itemList = new ObservableCollection<Item>(Item.GetItemList(ItemListLocation));
         }
 
         public void AutoCreateItems()
@@ -141,11 +141,11 @@ namespace ProfitLibrary
         {
             using (Stream writetext = stream)
             {
-                var line = new UTF8Encoding(true).GetBytes($"SKU;Name;AmazonSKU;EbaySKU;ItemCost;QuantityBought;QuantitySold;TotalCost;MoneyBack;Profit" + Environment.NewLine);
+                var line = new UTF8Encoding(true).GetBytes($"SKU;Name;AmazonSKU;EbaySKU;ItemCost;QuantityBought;QuantitySold;MoneyBack" + Environment.NewLine);
                 writetext.Write(line, 0, line.Length);
                 foreach (var item in ItemList)
                 {
-                    line = new UTF8Encoding(true).GetBytes($"{item.SKU};{item.Name};{item.AmazonSKU};{item.AmazonSKU};{item.ItemCost};{item.QuantityBought};{item.QuantitySold};{item.TotalCost};{item.MoneyBack};{item.Profit}" + Environment.NewLine);
+                    line = new UTF8Encoding(true).GetBytes($"{item.SKU};{item.Name};{item.AmazonSKU};{item.AmazonSKU};{item.ItemCost};{item.QuantityBought};{item.QuantitySold};{item.MoneyBack};" + Environment.NewLine);
                     writetext.Write(line, 0, line.Length);
                 }
             }

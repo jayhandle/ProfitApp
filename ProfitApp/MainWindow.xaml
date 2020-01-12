@@ -26,7 +26,7 @@
                 Content="Items" Click="Items_Click"/>
         </Grid>
         <Grid Grid.Row="1">
-            <Grid Name="ReportsGrid">
+            <Grid Name="ReportsGrid" d:IsHidden="True">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
@@ -101,7 +101,7 @@
                 <Button Grid.Row="3"
                 Content="Save Profit" Click="SaveProfit_Click"/>
             </Grid>
-            <Grid Name ="ItemsGrid" d:IsHidden="True">
+            <Grid Name ="ItemsGrid">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
