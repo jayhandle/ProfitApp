@@ -23,6 +23,9 @@ namespace ProfitLibrary
         public string EbaySKU { get; set; }
         public int QuantityBought { get; set; }
         public int QuantitySold { get; set; }
+        public long TotalCost { get; set; }
+        public long Profit { get; set; }
+        public long MoneyBack { get; set; }
 
         public static List<Item> GetItemList(string file)
         { 

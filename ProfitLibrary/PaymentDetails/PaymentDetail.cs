@@ -10,9 +10,16 @@ namespace ProfitLibrary
 
         public static long ConvertDollarstoPennies(string value)
         {
-            value = value.Split('$')[1];
+            if (value.Contains("$"))
+            {
+                value = value.Split('$')[1];
+            } 
             var dollars = value.Split('.')[0];
-            var cents = value.Split('.')[1];
+            var cents = "0";
+            if (value.Contains("."))
+            {
+                cents = value.Split('.')[1];
+            }
             var longDollar = int.Parse(dollars) * 100;
             var negative = dollars.Contains("-");
             if (negative)

@@ -32,6 +32,15 @@ namespace ProfitApp
             DataContext = vm;
         }
 
+        private void ProfitSearchFolders_Click(object sender, RoutedEventArgs e)
+        {
+            var fileDialog = new OpenFileDialog();
+            if (fileDialog.ShowDialog() == true)
+            {
+                vm.ProfitFileLocation = fileDialog.FileName;
+            }
+        }
+
         private void SearchFolders_Click(object sender, RoutedEventArgs e)
         {
             var fileDialog = new OpenFileDialog();
@@ -94,7 +103,8 @@ namespace ProfitApp
             {
                 var item = e.Row.Item as Item;
                 var textbox = e.EditingElement as TextBox;
-               vm.EditItemListItem(item, e.Column.Header.ToString(), textbox.Text);
+                vm.EditItemListItem(item, e.Column.Header.ToString(), textbox.Text);
+                //ResetDataGrid();
             }
         }
 
@@ -128,6 +138,45 @@ namespace ProfitApp
         {
             vm.AutoAssign();
             ResetDataGrid();
-        } 
+        }
+
+        private void CreateItemReport_Click(object sender, RoutedEventArgs e)
+        {
+            vm.CreateItemReport();
+            ResetDataGrid();
+        }
+
+        private void SaveProfit_Click(object sender, RoutedEventArgs e)
+        {
+            Stream myStream;
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+
+            saveFileDialog1.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
+            saveFileDialog1.FilterIndex = 2;
+            saveFileDialog1.RestoreDirectory = true;
+
+            if (saveFileDialog1.ShowDialog() == true)
+            {
+                if ((myStream = saveFileDialog1.OpenFile()) != null)
+                {
+                    vm.SaveOrderItemListToFile(myStream);
+                    myStream.Close();
+                }
+            }
+        }
+
+        private void DataGridProfit_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
+        {
+            if (e.Cancel)
+            {
+                return;
+            }
+            if (e.EditAction == DataGridEditAction.Commit)
+            {
+                var item = e.Row.Item as OrderItem;
+                var textbox = e.EditingElement as TextBox;
+                vm.EditOrderListItem(item, e.Column.Header.ToString(), textbox.Text);
+            }
+        }
     }
 }

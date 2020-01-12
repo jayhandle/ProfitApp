@@ -26,11 +26,11 @@
                 Content="Items" Click="Items_Click"/>
         </Grid>
         <Grid Grid.Row="1">
-            <Grid Name="ReportsGrid"
-                  Visibility="Hidden">
+            <Grid Name="ReportsGrid">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <StackPanel>
@@ -50,21 +50,33 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
+                        <Label Content="Profit Report"/>
+                        <TextBox Grid.Column="1" Text="{Binding ProfitFileLocation}"/>
+                        <Button Grid.Column="2" Content="Search Folders" Click="ProfitSearchFolders_Click"/>
+                    </Grid>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
                         <Label Content="Amazon Report"/>
                         <TextBox Grid.Column="1" Text="{Binding AmazonFileLocation}"/>
                         <Button Grid.Column="2" Content="Search Folders" Click="SearchFolders_Click"/>
                     </Grid>
                     <Button Content="Upload" Click="UploadReport_Click"/>
+                    <Button Content="Create Item Report" Click="CreateItemReport_Click"/>
                 </StackPanel>
                 <DataGrid Grid.Row="1"
             Name="dataGridProfit"
                   ItemsSource="{Binding OrderItems}"
-                  IsReadOnly="True" AutoGenerateColumns="False">
+                  IsReadOnly="False" AutoGenerateColumns="False"
+                          CellEditEnding="DataGridProfit_CellEditEnding">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Assigned" Binding="{Binding Assigned}" />
-                        <DataGridTextColumn Header="SKU" Binding="{Binding SKU}" />
+                        <DataGridTextColumn Header="Assigned" Binding="{Binding Assigned}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="SKU" Binding="{Binding SKU}"/>
                         <DataGridTextColumn Header="Item Name" Binding="{Binding ItemName}" />
-                        <DataGridTextColumn Header="Order ID" Binding="{Binding OrderID}" />
+                        <DataGridTextColumn Header="Order ID" Binding="{Binding OrderID}"/>
                         <DataGridTextColumn Header="Quantity Sold" Binding="{Binding QuantitySold}" />
                         <DataGridTextColumn Header="Date Sold" Binding="{Binding DateSold}" />
                         <DataGridTextColumn Header="Bought From" Binding="{Binding BoughtFrom}" />
@@ -72,7 +84,7 @@
                         <DataGridTextColumn Header="Sold For" Binding="{Binding SoldFor, Converter={StaticResource PenniesToDollarsConverter}}" />
                         <DataGridTextColumn Header="Shipping Cost" Binding="{Binding ShippingCost, Converter={StaticResource PenniesToDollarsConverter}}" />
                         <DataGridTextColumn Header="Selling Fees" Binding="{Binding SellingFees, Converter={StaticResource PenniesToDollarsConverter}}" />
-                        <DataGridTextColumn Header="Profit" Binding="{Binding Profit, Converter={StaticResource PenniesToDollarsConverter}}" />
+                        <DataGridTextColumn Header="Profit" Binding="{Binding Profit, Converter={StaticResource PenniesToDollarsConverter}}" IsReadOnly="True"/>
                     </DataGrid.Columns>
                 </DataGrid>
                 <Grid Grid.Row="2">
@@ -84,9 +96,12 @@
                 Content="Auto Create Items" Click="AutoCreateItems_Click"/>
                     <Button Grid.Column="1"
                 Content="Auto Assign" Click="AutoAssign_Click"/>
+                    
                 </Grid>
+                <Button Grid.Row="3"
+                Content="Save Profit" Click="SaveProfit_Click"/>
             </Grid>
-            <Grid Name ="ItemsGrid">
+            <Grid Name ="ItemsGrid" d:IsHidden="True">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -117,6 +132,9 @@
                         <DataGridTextColumn Header="Quantity Bought" Binding="{Binding QuantityBought}" />
                         <DataGridTextColumn Header="Quantity Sold" Binding="{Binding QuantitySold}" />
                         <DataGridTextColumn Header="Item Cost" Binding="{Binding ItemCost, Converter={StaticResource PenniesToDollarsConverter}}" />
+                        <DataGridTextColumn Header="Total Cost" Binding="{Binding TotalCost, Converter={StaticResource PenniesToDollarsConverter}}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Money Back" Binding="{Binding MoneyBack, Converter={StaticResource PenniesToDollarsConverter}}" IsReadOnly="True" />
+                        <DataGridTextColumn Header="Profit" Binding="{Binding Profit, Converter={StaticResource PenniesToDollarsConverter}}" IsReadOnly="True"/>
                     </DataGrid.Columns>
                 </DataGrid>
                 <Button Grid.Row="3" 

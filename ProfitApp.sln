@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProfitApp", "ProfitApp\Prof
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProfitLibrary", "ProfitLibrary\ProfitLibrary.csproj", "{F921552A-E1F0-48A0-A412-1892C42ECDFF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProfitApp.Tests", "ProfitApp.Tests\ProfitApp.Tests.csproj", "{6080C300-C100-45A9-8EB3-678C9F39402C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProfitApp.Tests", "ProfitApp.Tests\ProfitApp.Tests.csproj", "{6080C300-C100-45A9-8EB3-678C9F39402C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{4B0FABA4-032C-4C35-8E35-A3477DC06867}"
 EndProject

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -10,12 +11,13 @@ namespace ProfitLibrary
 {
     public class MainViewModel: ViewModel
     {
-        private List<OrderItem> orderItems;
+        private ObservableCollection<OrderItem> orderItems;
         private string itemListLocation;
         private string amazonFileLocation;
-        private List<Item> itemList;
+        private ObservableCollection<Item> itemList;
+        private string profitFileLocation;
 
-        public List<Item> ItemList
+        public ObservableCollection<Item> ItemList
         {
             get => itemList;
             set
@@ -24,7 +26,7 @@ namespace ProfitLibrary
                 OnPropertyChanged();
             }
         }
-        public List<OrderItem> OrderItems
+        public ObservableCollection<OrderItem> OrderItems
         {
             get => orderItems;
             set
@@ -33,7 +35,16 @@ namespace ProfitLibrary
                 OnPropertyChanged();
             }
         }
-
+        
+        public string ProfitFileLocation
+        {
+            get => profitFileLocation;
+            set
+            {
+                profitFileLocation = value;
+                OnPropertyChanged();
+            }
+        }
         public string AmazonFileLocation
         {
             get=> amazonFileLocation;
@@ -56,44 +67,57 @@ namespace ProfitLibrary
 
         public MainViewModel()
         {
-            ItemList = new List<Item>();
+            ItemList = new ObservableCollection<Item>();
         }
 
         public void GetReport()
         {
             GetItemListFromFile();
-            orderItems = new List<OrderItem>();
-            orderItems.AddRange(ProfitLibrary.AmazonReportUpload.GetReport(AmazonFileLocation));
-            orderItems.RemoveAll(i => string.IsNullOrWhiteSpace(i.SKU));
-            if (ItemList != null)
-            {
-                orderItems.ForEach((x) =>
-                {
-                    foreach (var item in ItemList)
-                    {
-                        if (item.AmazonSKU == x.SKU)
-                        {
-                            x.Assigned = true;
-                            item.QuantitySold = x.QuantitySold;
-                            x.ItemCost = -item.ItemCost;
-                            x.Profit = (x.SoldFor * x.QuantitySold) + x.ItemCost + x.SellingFees + x.ShippingCost;
-                            break;
-                        }
-                    }
-                });
-            }
-
-            OrderItems = orderItems;
+            GetOrderItemFromProfitReportFile();
+            //GetOrderItemsFromAmazonFile();
         }
+
+        private void GetOrderItemFromProfitReportFile()
+        {
+            OrderItems = new ObservableCollection<OrderItem>(OrderItem.GetOrderItemList(ProfitFileLocation));
+        }
+      
+
+        //private void GetOrderItemsFromAmazonFile()
+        //{
+        //    orderItems = orderItems ?? new ObservableCollection<OrderItem>();
+        //    AddOrderItemList(ProfitLibrary.AmazonReportUpload.GetReport(AmazonFileLocation));
+        //    orderItems.AddRange(ProfitLibrary.AmazonReportUpload.GetReport(AmazonFileLocation));
+        //    orderItems.RemoveAll(i => string.IsNullOrWhiteSpace(i.SKU));
+        //    if (ItemList != null)
+        //    {
+        //        orderItems.ForEach((x) =>
+        //        {
+        //            foreach (var item in ItemList)
+        //            {
+        //                if (item.AmazonSKU == x.SKU)
+        //                {
+        //                    x.Assigned = true;
+        //                    item.QuantitySold = x.QuantitySold;
+        //                    x.ItemCost = -item.ItemCost;
+        //                    x.Profit = (x.SoldFor * x.QuantitySold) + x.ItemCost + x.SellingFees + x.ShippingCost;
+        //                    break;
+        //                }
+        //            }
+        //        });
+        //    }
+
+        //    OrderItems = orderItems;
+        //}
 
         public void GetItemListFromFile()
         {
-            ItemList = Item.GetItemList(ItemListLocation);
+            ItemList = new ObservableCollection<Item>(Item.GetItemList(ItemListLocation));
         }
 
         public void AutoCreateItems()
         {
-            itemList = ItemList ?? new List<Item>();
+            itemList = ItemList ?? new ObservableCollection<Item>();
             var unassignedItems = OrderItems?.Where(x => !x.Assigned).ToList();
             unassignedItems?.ForEach((x) =>
             {
@@ -104,7 +128,7 @@ namespace ProfitLibrary
                     Name = x.ItemName,
                 };
 
-                if (!itemList.Exists(i => i.AmazonSKU == item.AmazonSKU))
+                if (!itemList.ToList().Exists(i => i.AmazonSKU == item.AmazonSKU))
                 {
                     itemList.Add(item);
                 }
@@ -112,16 +136,16 @@ namespace ProfitLibrary
 
             ItemList = itemList;
         }
-
+        
         public void SaveItemListToFile(Stream stream)
         {
             using (Stream writetext = stream)
             {
-                var line = new UTF8Encoding(true).GetBytes($"SKU;Name;AmazonSKU;EbaySKU;ItemCost;QuantityBought;QuantitySold" + Environment.NewLine);
+                var line = new UTF8Encoding(true).GetBytes($"SKU;Name;AmazonSKU;EbaySKU;ItemCost;QuantityBought;QuantitySold;TotalCost;MoneyBack;Profit" + Environment.NewLine);
                 writetext.Write(line, 0, line.Length);
                 foreach (var item in ItemList)
                 {
-                    line = new UTF8Encoding(true).GetBytes($"{item.SKU};{item.Name};{item.AmazonSKU};{item.AmazonSKU};{item.ItemCost};{item.QuantityBought};{item.QuantitySold}" + Environment.NewLine);
+                    line = new UTF8Encoding(true).GetBytes($"{item.SKU};{item.Name};{item.AmazonSKU};{item.AmazonSKU};{item.ItemCost};{item.QuantityBought};{item.QuantitySold};{item.TotalCost};{item.MoneyBack};{item.Profit}" + Environment.NewLine);
                     writetext.Write(line, 0, line.Length);
                 }
             }
@@ -131,22 +155,105 @@ namespace ProfitLibrary
         {
             if (ItemList != null)
             {
-                orderItems?.ForEach((x) =>
+                orderItems?.ToList().ForEach((x) =>
                 {
-                    foreach (var item in ItemList)
+                    if (!x.Assigned)
                     {
-                        if (item.AmazonSKU == x.SKU)
+                        foreach (var item in ItemList)
                         {
-                            x.Assigned = true;
-                            item.QuantitySold = x.QuantitySold;
-                            x.ItemCost = -item.ItemCost;
-                            x.Profit = (x.SoldFor * x.QuantitySold) + x.ItemCost + x.SellingFees + x.ShippingCost;
-                            break;
+                            if (x.SKU == item.SKU || x.SKU == item.AmazonSKU || x.SKU == item.EbaySKU)
+                            {
+                                x.ItemCost = -item.ItemCost;
+                                x.ItemName = item.Name;
+                                break;
+                            }
+                        }
+                        //else if (item.SKU == x.SKU)
+                        //{
+                        //    x.Assigned = true;
+                        //    x.QuantitySold = item.QuantitySold;
+                        //    x.ItemCost = -item.ItemCost;
+                        //    x.ItemName = item.Name;
+                        //    x.Profit = (x.SoldFor * x.QuantitySold) - x.ItemCost - x.SellingFees - x.ShippingCost;
+                        //    break;
+                        //}
+                    }
+
+                    x.Profit = (x.SoldFor * x.QuantitySold) + x.ItemCost + x.SellingFees + x.ShippingCost;
+
+                    x.Assigned = true;
+                });
+
+                itemList.ToList().ForEach((x) => 
+                {
+                    x.QuantitySold = 0;
+                    x.Profit = 0;
+                    long totalProfit = 0;
+                    foreach(var orderItem in orderItems)
+                    {
+                        if(orderItem.SKU == x.SKU || orderItem.SKU == x.AmazonSKU || orderItem.SKU == x.EbaySKU)
+                        {
+                            x.QuantitySold += orderItem.QuantitySold;
+                            totalProfit += orderItem.Profit;
                         }
                     }
+
+                    x.MoneyBack = (x.QuantitySold * x.ItemCost) + totalProfit;
+
+                    EnsureItemCalculations(ref x);                    
                 });
             }
 
+            OrderItems = orderItems;
+
+            
+        }
+
+        private void EnsureItemCalculations(ref Item item)
+        {
+            item.TotalCost = item.ItemCost * item.QuantityBought;
+            item.Profit = item.MoneyBack - item.TotalCost;
+        }
+
+        public void EditOrderListItem(OrderItem selectedOrderItem, string header, string value)
+        {
+            switch (header)
+            {
+                case "SKU":
+                    orderItems[orderItems.IndexOf(selectedOrderItem)].SKU = value;
+                    var item = ItemList.FirstOrDefault(x => x.AmazonSKU == value || x.EbaySKU == value || x.SKU == value);
+                    if (item != null)
+                    {
+                        orderItems[orderItems.IndexOf(selectedOrderItem)].ItemName = item.Name;
+                        orderItems[orderItems.IndexOf(selectedOrderItem)].ItemCost = -item.ItemCost;
+                    }
+                    break;
+                case "Item Cost":
+                    orderItems[orderItems.IndexOf(selectedOrderItem)].ItemCost = PaymentDetail.ConvertDollarstoPennies(value);
+                    break;
+            }
+
+            OrderItems = orderItems;
+        }
+
+        public void SaveOrderItemListToFile(Stream stream)
+        {
+            using (Stream writetext = stream)
+            {
+                var line = new UTF8Encoding(true).GetBytes($"Assigned;SKU;ItemName;OrderID;QuantitySold;DateSold;BoughtFrom;ItemCost;SoldFor;ShippingCost;SellingFees;Profit" + Environment.NewLine);
+                writetext.Write(line, 0, line.Length);
+                foreach (var item in OrderItems)
+                {
+                    line = new UTF8Encoding(true).GetBytes($"{item.Assigned};{item.SKU};{item.ItemName};{item.OrderID};{item.QuantitySold};{item.DateSold};{item.BoughtFrom};{item.ItemCost};{item.SoldFor};{item.ShippingCost};{item.SellingFees};{item.Profit}" + Environment.NewLine);
+                    writetext.Write(line, 0, line.Length);
+                }
+            }
+        }
+
+        public void CreateItemReport()
+        {
+            orderItems = orderItems ?? new ObservableCollection<OrderItem>();
+            orderItems.Add(new OrderItem());
             OrderItems = orderItems;
         }
 
@@ -193,6 +300,8 @@ namespace ProfitLibrary
             }
 
             selectedItem.SKU = string.IsNullOrWhiteSpace(selectedItem.SKU) ? itemList.Count.ToString() : selectedItem.SKU;
+            EnsureItemCalculations(ref selectedItem);
+            itemList[itemList.IndexOf(selectedItem)] = selectedItem;
             ItemList = itemList;
         }
     }
