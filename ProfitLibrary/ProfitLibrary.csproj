@@ -60,6 +60,7 @@
     <Compile Include="PaymentType\ShippingTax.cs" />
     <Compile Include="PaymentType\SubscriptionFee.cs" />
     <Compile Include="PaymentType\TransactionFee.cs" />
+    <Compile Include="PayPalReportUpload.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PaymentType\PromoRebates.cs" />
     <Compile Include="TransactionType\Refund.cs" />

@@ -14,11 +14,14 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
+
+
             </Grid.ColumnDefinitions>
             <Button Grid.Column="0"
                 Content="Report" Click="Reports_Click"/>
@@ -26,7 +29,7 @@
                 Content="Items" Click="Items_Click"/>
         </Grid>
         <Grid Grid.Row="1">
-            <Grid Name="ReportsGrid" d:IsHidden="True">
+            <Grid Name="ReportsGrid">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
@@ -60,8 +63,8 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
-                        <Label Content="Amazon Report"/>
-                        <TextBox Grid.Column="1" Text="{Binding AmazonFileLocation}"/>
+                        <Label Content="PayPal Report"/>
+                        <TextBox Grid.Column="1" Text="{Binding PayPalFileLocation}"/>
                         <Button Grid.Column="2" Content="Search Folders" Click="SearchFolders_Click"/>
                     </Grid>
                     <Button Content="Upload" Click="UploadReport_Click"/>
@@ -73,6 +76,7 @@
                   IsReadOnly="False" AutoGenerateColumns="False"
                           CellEditEnding="DataGridProfit_CellEditEnding">
                     <DataGrid.Columns>
+                        <DataGridTextColumn Header="Assigned" Binding="{Binding Reviewed}"/>
                         <DataGridTextColumn Header="Assigned" Binding="{Binding Assigned}" IsReadOnly="True"/>
                         <DataGridTextColumn Header="SKU" Binding="{Binding SKU}"/>
                         <DataGridTextColumn Header="Item Name" Binding="{Binding ItemName}" />
@@ -80,6 +84,7 @@
                         <DataGridTextColumn Header="Quantity Sold" Binding="{Binding QuantitySold}" />
                         <DataGridTextColumn Header="Date Sold" Binding="{Binding DateSold}" />
                         <DataGridTextColumn Header="Bought From" Binding="{Binding BoughtFrom}" />
+                        <DataGridTextColumn Header="SalesTax" Binding="{Binding SalesTax, Converter={StaticResource PenniesToDollarsConverter}}" />
                         <DataGridTextColumn Header="Item Cost" Binding="{Binding ItemCost, Converter={StaticResource PenniesToDollarsConverter}}" />
                         <DataGridTextColumn Header="Sold For" Binding="{Binding SoldFor, Converter={StaticResource PenniesToDollarsConverter}}" />
                         <DataGridTextColumn Header="Shipping Cost" Binding="{Binding ShippingCost, Converter={StaticResource PenniesToDollarsConverter}}" />
@@ -90,18 +95,16 @@
                 <Grid Grid.Row="2">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <Button Grid.Column="0"
                 Content="Auto Create Items" Click="AutoCreateItems_Click"/>
-                    <Button Grid.Column="1"
-                Content="Auto Assign" Click="AutoAssign_Click"/>
+                
                     
                 </Grid>
                 <Button Grid.Row="3"
                 Content="Save Profit" Click="SaveProfit_Click"/>
             </Grid>
-            <Grid Name ="ItemsGrid">
+            <Grid Name ="ItemsGrid" d:IsHidden="True">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -140,6 +143,10 @@
                 <Button Grid.Row="3" 
                         Content="Save" Click="Save_Click"/>
             </Grid>
+        </Grid>
+        <Grid Grid.Row="2">
+            <Button 
+                Content="Auto Assign" Click="AutoAssign_Click"/>
         </Grid>
     </Grid>
 </Window>

@@ -16,7 +16,7 @@ namespace ProfitLibrary.Test
         public void GetReport(MainViewModelData.GetReportData data)
         {            
             vm.ItemListLocation = data.ItemListLocation;
-            vm.AmazonFileLocation = data.AmazonReportLocation;
+            vm.PayPalFileLocation = data.AmazonReportLocation;
             vm.GetReport();
             Assert.AreEqual(data.OrderItemsCount, vm.OrderItems.Count, data.Title);
             Assert.AreEqual(data.ItemListCount, vm.ItemList.Count, data.Title);

@@ -46,7 +46,7 @@ namespace ProfitApp
             var fileDialog = new OpenFileDialog();
             if (fileDialog.ShowDialog() == true)
             {
-                vm.AmazonFileLocation = fileDialog.FileName;
+                vm.PayPalFileLocation = fileDialog.FileName;
             }
         }
 

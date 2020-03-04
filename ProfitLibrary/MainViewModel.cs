@@ -13,7 +13,7 @@ namespace ProfitLibrary
     {
         private ObservableCollection<OrderItem> orderItems;
         private string itemListLocation;
-        private string amazonFileLocation;
+        private string paypalFileLocation;
         private ObservableCollection<Item> itemList;
         private string profitFileLocation;
 
@@ -45,12 +45,12 @@ namespace ProfitLibrary
                 OnPropertyChanged();
             }
         }
-        public string AmazonFileLocation
+        public string PayPalFileLocation
         {
-            get=> amazonFileLocation;
+            get=> paypalFileLocation;
             set
             {
-                amazonFileLocation = value;
+                paypalFileLocation = value;
                 OnPropertyChanged();
             }
         }
@@ -75,6 +75,34 @@ namespace ProfitLibrary
             GetItemListFromFile();
             GetOrderItemFromProfitReportFile();
             //GetOrderItemsFromAmazonFile();
+            GetOrderItemsFromPayPalFile();
+        }
+
+        private void GetOrderItemsFromPayPalFile()
+        {
+            var paypalOrderItem = new List<OrderItem>();
+            //AddOrderItemList(ProfitLibrary.PayPalReportUpload.GetReport(PayPalFileLocation));
+            paypalOrderItem.AddRange(ProfitLibrary.PayPalReportUpload.GetReport(PayPalFileLocation));
+            paypalOrderItem.RemoveAll(i => string.IsNullOrWhiteSpace(i.SKU));
+            if (ItemList != null)
+            {
+                paypalOrderItem.ForEach((x) =>
+                {
+                    foreach (var item in ItemList)
+                    {
+                        if (item.AmazonSKU == x.SKU)
+                        {
+                            x.Assigned = true;
+                            item.QuantitySold = x.QuantitySold;
+                            x.ItemCost = -item.ItemCost;
+                            x.Profit = (x.SoldFor * x.QuantitySold) + x.ItemCost + x.SellingFees + x.ShippingCost;
+                            break;
+                        }
+                    }
+                });
+            }
+
+            OrderItems = orderItems;
         }
 
         private void GetOrderItemFromProfitReportFile()
@@ -141,11 +169,11 @@ namespace ProfitLibrary
         {
             using (Stream writetext = stream)
             {
-                var line = new UTF8Encoding(true).GetBytes($"SKU;Name;AmazonSKU;EbaySKU;ItemCost;QuantityBought;QuantitySold;MoneyBack" + Environment.NewLine);
+                var line = new UTF8Encoding(true).GetBytes($"SKU;Name;AmazonSKU;EbaySKU;ItemCost;QuantityBought;QuantitySold;MoneyBack;Profit" + Environment.NewLine);
                 writetext.Write(line, 0, line.Length);
                 foreach (var item in ItemList)
                 {
-                    line = new UTF8Encoding(true).GetBytes($"{item.SKU};{item.Name};{item.AmazonSKU};{item.AmazonSKU};{item.ItemCost};{item.QuantityBought};{item.QuantitySold};{item.MoneyBack};" + Environment.NewLine);
+                    line = new UTF8Encoding(true).GetBytes($"{item.SKU};{item.Name};{item.AmazonSKU};{item.AmazonSKU};{item.ItemCost};{item.QuantityBought};{item.QuantitySold};{item.MoneyBack};{item.Profit}" + Environment.NewLine);
                     writetext.Write(line, 0, line.Length);
                 }
             }
@@ -231,20 +259,40 @@ namespace ProfitLibrary
                 case "Item Cost":
                     orderItems[orderItems.IndexOf(selectedOrderItem)].ItemCost = PaymentDetail.ConvertDollarstoPennies(value);
                     break;
+                case "Bought From":
+                case "Sold For":
+                    if (orderItems[orderItems.IndexOf(selectedOrderItem)].BoughtFrom == "Ebay")
+                    {
+                        var soldfor = orderItems[orderItems.IndexOf(selectedOrderItem)].SoldFor;
+                        value = GetEbayFee(soldfor.ToString());
+                        orderItems[orderItems.IndexOf(selectedOrderItem)].SellingFees = -PaymentDetail.ConvertDollarstoPennies(value);
+                    }
+                    break;
             }
 
             OrderItems = orderItems;
+        }
+
+        private string GetEbayFee(string soldfor)
+        {
+            decimal value = long.Parse(soldfor) / 100m;
+            value = Math.Round(value, 2);
+            var ebay = (value * .1m);
+            ebay = Math.Round(ebay, 2);
+            var pp = (value * .029m) + .30m;
+            pp = Math.Round(pp, 2);
+            return Math.Round(pp + ebay, 2).ToString();
         }
 
         public void SaveOrderItemListToFile(Stream stream)
         {
             using (Stream writetext = stream)
             {
-                var line = new UTF8Encoding(true).GetBytes($"Assigned;SKU;ItemName;OrderID;QuantitySold;DateSold;BoughtFrom;ItemCost;SoldFor;ShippingCost;SellingFees;Profit" + Environment.NewLine);
+                var line = new UTF8Encoding(true).GetBytes($"Reviewed;Assigned;SKU;ItemName;OrderID;QuantitySold;DateSold;BoughtFrom;ItemCost;SalesTax;SoldFor;ShippingCost;SellingFees;Profit" + Environment.NewLine);
                 writetext.Write(line, 0, line.Length);
                 foreach (var item in OrderItems)
                 {
-                    line = new UTF8Encoding(true).GetBytes($"{item.Assigned};{item.SKU};{item.ItemName};{item.OrderID};{item.QuantitySold};{item.DateSold};{item.BoughtFrom};{item.ItemCost};{item.SoldFor};{item.ShippingCost};{item.SellingFees};{item.Profit}" + Environment.NewLine);
+                    line = new UTF8Encoding(true).GetBytes($"{item.Reviewed};{item.Assigned};{item.SKU};{item.ItemName};{item.OrderID};{item.QuantitySold};{item.DateSold};{item.BoughtFrom};{item.ItemCost};{item.SalesTax};{item.SoldFor};{item.ShippingCost};{item.SellingFees};{item.Profit}" + Environment.NewLine);
                     writetext.Write(line, 0, line.Length);
                 }
             }

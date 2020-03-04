@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ProfitLibrary
 {
@@ -21,9 +17,12 @@ namespace ProfitLibrary
         private static int shipping_cost = 9;
         private static int selling_fees = 10;
         private static int profit = 11;
+        private static int sales_tax = 12;
+        private static int reviewed = 13;
         public bool Assigned { get; set; }
         public string SKU { get; set; }
         public string OrderID { get; set; }
+        public bool Reviewed { get; set; }
         public string ItemName { get; set; }
         public int QuantitySold { get; set; }
         public string DateSold { get; set; }
@@ -33,6 +32,7 @@ namespace ProfitLibrary
         public long ShippingCost { get; set; }
         public long SellingFees { get; set; }      
         public long Profit { get; set; }
+        public long SalesTax { get; set; }
 
         internal static List<OrderItem> GetOrderItemList(string file)
         {
@@ -68,6 +68,8 @@ namespace ProfitLibrary
                             ShippingCost = long.TryParse(values[shipping_cost], out long shippingcost) ? shippingcost : 0,
                             SellingFees = long.TryParse(values[selling_fees], out long sellingfees) ? sellingfees : 0,
                             Profit = long.TryParse(values[profit], out long lprofit) ? lprofit : 0,
+                            SalesTax = long.TryParse(values[sales_tax], out long lsalestax) ? lsalestax : 0,
+                            Reviewed = bool.TryParse(values[assigned], out bool review) ? review : false,
                         };
 
                         orderItemList.Add(orderItem);
