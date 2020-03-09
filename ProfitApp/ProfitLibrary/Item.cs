@@ -17,7 +17,6 @@ namespace ProfitLibrary
         private static int quantity_bought = 5;
         private static int quantity_sold = 6;
         private static int money_back = 7;
-        public  int ID { get; set; }
         public string SKU { get; set; }
         public string Name { get; set; }
         public long ItemCost { get; set; }

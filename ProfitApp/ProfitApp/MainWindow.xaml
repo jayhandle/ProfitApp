@@ -31,7 +31,7 @@
                 Content="  Setting  " Click="Settings_Click"/>
         </Grid>
         <Grid Grid.Row="1">
-            <Grid Name="ReportsGrid">
+            <Grid Name="ReportsGrid" d:IsHidden="True">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
@@ -39,19 +39,8 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <StackPanel>
+                    
                     <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="13.647"/>
-                                <ColumnDefinition Width="63.353"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-                            <Label Content="Profit Report" Grid.ColumnSpan="2"/>
-                            <TextBox Grid.Column="2" Text="{Binding DatabaseLocation}"/>
-                            <Button Grid.Column="3" Content="Search Database" Click="DatabaseSearchFolders_Click"/>
-                        </Grid>
-                    <Button Content="Open" Click="OpenDatabase_Click"/>
-                    <!--<Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="*"/>
@@ -62,10 +51,10 @@
                         <Button Grid.Column="2" Content="Search Folders" Click="SearchFolders_Click"/>
                     </Grid>
                     <Button Content="Upload" Click="UploadReport_Click"/>
-                    <Button Content="Create Item Report" Click="CreateItemReport_Click"/>-->
+                    <Button Content="Create Item Report" Click="CreateItemReport_Click"/>
                 </StackPanel>
                 <DataGrid Grid.Row="1"
-            x:Name="dataGridProfit"
+            Name="dataGridProfit"
                   ItemsSource="{Binding OrderItems}"
                   IsReadOnly="False" AutoGenerateColumns="False"
                           CellEditEnding="DataGridProfit_CellEditEnding">
@@ -95,8 +84,8 @@
 
 
                 </Grid>
-                <!--<Button Grid.Row="3"
-                Content="Save Profit" Click="SaveProfit_Click"/>-->
+                <Button Grid.Row="3"
+                Content="Save Profit" Click="SaveProfit_Click"/>
             </Grid>
             <Grid Name ="ItemsGrid" d:IsHidden="True">
                 <Grid.RowDefinitions>
@@ -137,51 +126,33 @@
                 <Button Grid.Row="3" 
                         Content="Save" Click="Save_Click"/>
             </Grid>
-            <Grid Name="SettingsGrid" d:IsHidden="True">
-                <StackPanel>
-                    <GroupBox Header="Database Manager">
-                        <StackPanel>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="13.647"/>
-                                    <ColumnDefinition Width="63.353"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
-                                <Label Content="Profit Report" Grid.ColumnSpan="2"/>
-                                <TextBox Grid.Column="2" Text="{Binding DatabaseLocation}"/>
-                                <Button Grid.Column="3" Content="Search Database" Click="DatabaseSearchFolders_Click"/>
-                            </Grid>
-                            <Button Content="Open" Click="OpenDatabase_Click"/>
-                        </StackPanel>
-                    </GroupBox>
-                    <GroupBox Header="Import">
-                        <StackPanel>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
-                                <Label Content="Item List"/>
-                                <TextBox Grid.Column="1" Text="{Binding ItemListLocation}"/>
-                                <Button Grid.Column="2" Content="Search Items" Click="SearchItemFolders_Click"/>
-                            </Grid>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="13.647"/>
-                                    <ColumnDefinition Width="63.353"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
-                                <Label Content="Profit Report" Grid.ColumnSpan="2"/>
-                                <TextBox Grid.Column="2" Text="{Binding ProfitFileLocation}"/>
-                                <Button Grid.Column="3" Content="Search Folders" Click="ProfitSearchFolders_Click"/>
-                            </Grid>
-                            <Button Content="Import" Click="UploadReport_Click"/>
-                        </StackPanel>
-                    </GroupBox>
-                </StackPanel>
+            <Grid Name="SettingsGrid">
+                <GroupBox Header="Import">
+                    <StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Content="Item List"/>
+                            <TextBox Grid.Column="1" Text="{Binding ItemListLocation}"/>
+                            <Button Grid.Column="2" Content="Search Items" Click="SearchItemFolders_Click"/>
+                        </Grid>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="13.647"/>
+                                <ColumnDefinition Width="63.353"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Content="Profit Report" Grid.ColumnSpan="2"/>
+                            <TextBox Grid.Column="2" Text="{Binding ProfitFileLocation}"/>
+                            <Button Grid.Column="3" Content="Search Folders" Click="ProfitSearchFolders_Click"/>
+                        </Grid>
+                        <Button Content="Import" Click="Import_Click"/>
+                    </StackPanel>
+                </GroupBox>
             </Grid>
         </Grid>
         <Grid Grid.Row="2">

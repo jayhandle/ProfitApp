@@ -1,0 +1,179 @@
+"Transaction Summary for June 1, 2019 to June 10, 2019"								
+Transactions: 59							#N/A	
+								
+Date	Order ID	SKU	Transaction type	Payment Type	Payment Detail	Amount	Quantity	Product Title
+"Jun 10, 2019"	111-0475708-7538634	3X-KCRW-T17H	Order Payment	Amazon fees	Referral Fee on Item Price	$-5.70		Wholesale Africa Ankara Supreme Wax Print Blue/White/Black
+"Jun 10, 2019"	111-0475708-7538634	3X-KCRW-T17H	Order Payment	Amazon fees	Shipping commission	$-0.73		Wholesale Africa Ankara Supreme Wax Print Blue/White/Black
+"Jun 10, 2019"	111-0475708-7538634	3X-KCRW-T17H	Order Payment	Product charges		$37.99	1	Wholesale Africa Ankara Supreme Wax Print Blue/White/Black
+"Jun 10, 2019"	111-0475708-7538634	3X-KCRW-T17H	Order Payment	Other	Shipping	$4.90		Wholesale Africa Ankara Supreme Wax Print Blue/White/Black
+"Jun 10, 2019"	111-0475708-7538634		Shipping services purchased through Amazon	Amazon fees	Transaction Fee	$0.00		
+"Jun 10, 2019"	111-0475708-7538634		Shipping services purchased through Amazon	Shipping Service Charges	Delivery Confirmation	$0.00		
+"Jun 10, 2019"	111-0475708-7538634		Shipping services purchased through Amazon	Shipping Service Charges	Shipping Label	$-6.95		
+"Jun 10, 2019"	112-7490420-6498614	RH-UYKB-E63S	Order Payment	Amazon fees	FBA Pick & Pack Fee	$-19.04		EcoSmart 65W Equivalent Soft White (2700K) BR30 Dimmable LED Light Bulb (3-Pack)
+"Jun 10, 2019"	112-7490420-6498614	RH-UYKB-E63S	Order Payment	Amazon fees	Referral Fee on Item Price	$-8.92		EcoSmart 65W Equivalent Soft White (2700K) BR30 Dimmable LED Light Bulb (3-Pack)
+"Jun 10, 2019"	112-7490420-6498614	RH-UYKB-E63S	Order Payment	Product charges		$59.56	4	EcoSmart 65W Equivalent Soft White (2700K) BR30 Dimmable LED Light Bulb (3-Pack)
+"Jun 10, 2019"	112-7490420-6498614	RH-UYKB-E63S	Order Payment	Other	Product Tax	$3.96		EcoSmart 65W Equivalent Soft White (2700K) BR30 Dimmable LED Light Bulb (3-Pack)
+"Jun 10, 2019"			Service Fees	Amazon fees	FBA Inventory Storage Fee	$-6.87		
+"Jun 9, 2019"	112-5638636-5798615	XA-HPMT-VT3C	Order Payment	Amazon fees	FBA Pick & Pack Fee	$-6.02		"Cottonelle Ultra Comfort Care Toilet Paper, Bath Tissue, 6 Mega Toilet Paper Rolls"
+"Jun 9, 2019"	112-5638636-5798615	XA-HPMT-VT3C	Order Payment	Amazon fees	Referral Fee on Item Price	$-2.81		"Cottonelle Ultra Comfort Care Toilet Paper, Bath Tissue, 6 Mega Toilet Paper Rolls"
+"Jun 9, 2019"	112-5638636-5798615	XA-HPMT-VT3C	Order Payment	Product charges		$18.73	1	"Cottonelle Ultra Comfort Care Toilet Paper, Bath Tissue, 6 Mega Toilet Paper Rolls"
+"Jun 9, 2019"	113-1295921-9008213	6H-V0MQ-KJS7	Order Payment	Amazon fees	FBA Pick & Pack Fee	$-5.26		KENT'E African Ankara Supreme Wax Print
+"Jun 9, 2019"	113-1295921-9008213	6H-V0MQ-KJS7	Order Payment	Amazon fees	Referral Fee on Item Price	$-6.59		KENT'E African Ankara Supreme Wax Print
+"Jun 9, 2019"	='Amazon Report'!IF('Amazon Report'!B5:B179 = 	6H-V0MQ-KJS7	Order Payment	Product charges		$43.95	1	KENT'E African Ankara Supreme Wax Print
+"Jun 9, 2019"	112-6713901-7446620	XA-HPMT-VT3C	Order Payment	Amazon fees	FBA Pick & Pack Fee	$-6.02		"Cottonelle Ultra Comfort Care Toilet Paper, Bath Tissue, 6 Mega Toilet Paper Rolls"
+"Jun 9, 2019"	112-6713901-7446620	XA-HPMT-VT3C	Order Payment	Amazon fees	Referral Fee on Item Price	$-2.81		"Cottonelle Ultra Comfort Care Toilet Paper, Bath Tissue, 6 Mega Toilet Paper Rolls"
+"Jun 9, 2019"	112-6713901-7446620	XA-HPMT-VT3C	Order Payment	Product charges		$18.73	1	"Cottonelle Ultra Comfort Care Toilet Paper, Bath Tissue, 6 Mega Toilet Paper Rolls"
+"Jun 9, 2019"			Service Fees	Amazon fees	Subscription Fee	$-39.99		
+"Jun 9, 2019"	114-1333647-9414625	XA-HPMT-VT3C	Order Payment	Amazon fees	FBA Pick & Pack Fee	$-6.02		"Cottonelle Ultra Comfort Care Toilet Paper, Bath Tissue, 6 Mega Toilet Paper Rolls"
+"Jun 9, 2019"	114-1333647-9414625	XA-HPMT-VT3C	Order Payment	Amazon fees	Referral Fee on Item Price	$-2.81		"Cottonelle Ultra Comfort Care Toilet Paper, Bath Tissue, 6 Mega Toilet Paper Rolls"
+"Jun 9, 2019"	114-1333647-9414625	XA-HPMT-VT3C	Order Payment	Product charges		$18.73	1	"Cottonelle Ultra Comfort Care Toilet Paper, Bath Tissue, 6 Mega Toilet Paper Rolls"
+"Jun 9, 2019"	114-1333647-9414625	XA-HPMT-VT3C	Order Payment	Promo rebates		$0.00	1	"Cottonelle Ultra Comfort Care Toilet Paper, Bath Tissue, 6 Mega Toilet Paper Rolls"
+"Jun 9, 2019"	114-1333647-9414625	XA-HPMT-VT3C	Order Payment	Promo rebates	Shipping	$-5.99		"Cottonelle Ultra Comfort Care Toilet Paper, Bath Tissue, 6 Mega Toilet Paper Rolls"
+"Jun 9, 2019"	114-1333647-9414625	XA-HPMT-VT3C	Order Payment	Other	Shipping	$5.99		"Cottonelle Ultra Comfort Care Toilet Paper, Bath Tissue, 6 Mega Toilet Paper Rolls"
+"Jun 8, 2019"	114-2925780-2098616	XA-HPMT-VT3C	Order Payment	Amazon fees	FBA Pick & Pack Fee	$-6.02		"Cottonelle Ultra Comfort Care Toilet Paper, Bath Tissue, 6 Mega Toilet Paper Rolls"
+"Jun 8, 2019"	114-2925780-2098616	XA-HPMT-VT3C	Order Payment	Amazon fees	Referral Fee on Item Price	$-2.81		"Cottonelle Ultra Comfort Care Toilet Paper, Bath Tissue, 6 Mega Toilet Paper Rolls"
+"Jun 8, 2019"	114-2925780-2098616	XA-HPMT-VT3C	Order Payment	Product charges		$18.73	1	"Cottonelle Ultra Comfort Care Toilet Paper, Bath Tissue, 6 Mega Toilet Paper Rolls"
+"Jun 8, 2019"	114-7653656-2238666	7N-6V9Y-FSWF	Order Payment	Amazon fees	FBA Pick & Pack Fee	$-5.26		Africa Ankara Supreme Wax Print
+"Jun 8, 2019"	114-7653656-2238666	7N-6V9Y-FSWF	Order Payment	Amazon fees	Referral Fee on Item Price	$-5.99		Africa Ankara Supreme Wax Print
+"Jun 8, 2019"	114-7653656-2238666	7N-6V9Y-FSWF	Order Payment	Product charges		$39.95	1	Africa Ankara Supreme Wax Print
+"Jun 8, 2019"	114-7653656-2238666	7N-6V9Y-FSWF	Order Payment	Other	Product Tax	$3.55		Africa Ankara Supreme Wax Print
+"Jun 7, 2019"	113-9548499-3296203		Shipping services purchased through Amazon	Amazon fees	Transaction Fee	$0.00		
+"Jun 7, 2019"	113-9548499-3296203		Shipping services purchased through Amazon	Shipping Service Charges	Delivery Confirmation	$0.00		
+"Jun 7, 2019"	113-9548499-3296203		Shipping services purchased through Amazon	Shipping Service Charges	Shipping Label	$-6.95		
+"Jun 7, 2019"	113-9548499-3296203	NX-EYUN-DZII	Order Payment	Amazon fees	Referral Fee on Item Price	$-5.99		"African ankara fabric African wax Print fabric for sewing dress Clothing Designs Wax Material For Fashion, Dresses, Top, Skirt, Jewelry, Shoes, Bags,"
+"Jun 7, 2019"	113-9548499-3296203	NX-EYUN-DZII	Order Payment	Amazon fees	Shipping commission	$-0.74		"African ankara fabric African wax Print fabric for sewing dress Clothing Designs Wax Material For Fashion, Dresses, Top, Skirt, Jewelry, Shoes, Bags,"
+"Jun 7, 2019"	113-9548499-3296203	NX-EYUN-DZII	Order Payment	Product charges		$39.95	1	"African ankara fabric African wax Print fabric for sewing dress Clothing Designs Wax Material For Fashion, Dresses, Top, Skirt, Jewelry, Shoes, Bags,"
+"Jun 7, 2019"	113-9548499-3296203	NX-EYUN-DZII	Order Payment	Other	Product Tax	$2.65		"African ankara fabric African wax Print fabric for sewing dress Clothing Designs Wax Material For Fashion, Dresses, Top, Skirt, Jewelry, Shoes, Bags,"
+"Jun 7, 2019"	113-9548499-3296203	NX-EYUN-DZII	Order Payment	Other	Shipping tax	$0.32		"African ankara fabric African wax Print fabric for sewing dress Clothing Designs Wax Material For Fashion, Dresses, Top, Skirt, Jewelry, Shoes, Bags,"
+"Jun 7, 2019"	113-9548499-3296203	NX-EYUN-DZII	Order Payment	Other	Shipping	$4.90		"African ankara fabric African wax Print fabric for sewing dress Clothing Designs Wax Material For Fashion, Dresses, Top, Skirt, Jewelry, Shoes, Bags,"
+"Jun 7, 2019"	114-4866188-7621016		Shipping services purchased through Amazon	Amazon fees	Transaction Fee	$0.00		
+"Jun 7, 2019"	114-4866188-7621016		Shipping services purchased through Amazon	Shipping Service Charges	Delivery Confirmation	$0.00		
+"Jun 7, 2019"	114-4866188-7621016		Shipping services purchased through Amazon	Shipping Service Charges	Shipping Label	$-6.95		
+"Jun 7, 2019"	114-4999027-8432226		Shipping services purchased through Amazon	Amazon fees	Transaction Fee	$0.00		
+"Jun 7, 2019"	114-4999027-8432226		Shipping services purchased through Amazon	Shipping Service Charges	Delivery Confirmation	$0.00		
+"Jun 7, 2019"	114-4999027-8432226		Shipping services purchased through Amazon	Shipping Service Charges	Shipping Label	$-6.95		
+"Jun 7, 2019"	114-4866188-7621016	T4-PSZB-9PV0	Order Payment	Amazon fees	Referral Fee on Item Price	$-6.60		"African ankara fabric African wax Print fabric for sewing dress Clothing Designs Wax Material For Fashion, Dresses, Top, Skirt, Jewelry, Shoes, Bags,"
+"Jun 7, 2019"	114-4866188-7621016	T4-PSZB-9PV0	Order Payment	Amazon fees	Shipping commission	$-1.35		"African ankara fabric African wax Print fabric for sewing dress Clothing Designs Wax Material For Fashion, Dresses, Top, Skirt, Jewelry, Shoes, Bags,"
+"Jun 7, 2019"	114-4866188-7621016	T4-PSZB-9PV0	Order Payment	Product charges		$43.98	1	"African ankara fabric African wax Print fabric for sewing dress Clothing Designs Wax Material For Fashion, Dresses, Top, Skirt, Jewelry, Shoes, Bags,"
+"Jun 7, 2019"	114-4866188-7621016	T4-PSZB-9PV0	Order Payment	Other	Shipping	$9.00		"African ankara fabric African wax Print fabric for sewing dress Clothing Designs Wax Material For Fashion, Dresses, Top, Skirt, Jewelry, Shoes, Bags,"
+"Jun 7, 2019"	114-4999027-8432226	T4-PSZB-9PV0	Order Payment	Amazon fees	Referral Fee on Item Price	$-6.60		"African ankara fabric African wax Print fabric for sewing dress Clothing Designs Wax Material For Fashion, Dresses, Top, Skirt, Jewelry, Shoes, Bags,"
+"Jun 7, 2019"	114-4999027-8432226	T4-PSZB-9PV0	Order Payment	Amazon fees	Shipping commission	$-1.35		"African ankara fabric African wax Print fabric for sewing dress Clothing Designs Wax Material For Fashion, Dresses, Top, Skirt, Jewelry, Shoes, Bags,"
+"Jun 7, 2019"	114-4999027-8432226	T4-PSZB-9PV0	Order Payment	Product charges		$43.98	1	"African ankara fabric African wax Print fabric for sewing dress Clothing Designs Wax Material For Fashion, Dresses, Top, Skirt, Jewelry, Shoes, Bags,"
+"Jun 7, 2019"	114-4999027-8432226	T4-PSZB-9PV0	Order Payment	Other	Shipping	$9.00		"African ankara fabric African wax Print fabric for sewing dress Clothing Designs Wax Material For Fashion, Dresses, Top, Skirt, Jewelry, Shoes, Bags,"
+"Jun 6, 2019"	113-1841804-7825063	XA-HPMT-VT3C	Order Payment	Amazon fees	FBA Pick & Pack Fee	$-6.02		"Cottonelle Ultra Comfort Care Toilet Paper, Bath Tissue, 6 Mega Toilet Paper Rolls"
+"Jun 6, 2019"	113-1841804-7825063	XA-HPMT-VT3C	Order Payment	Amazon fees	Referral Fee on Item Price	$-2.81		"Cottonelle Ultra Comfort Care Toilet Paper, Bath Tissue, 6 Mega Toilet Paper Rolls"
+"Jun 6, 2019"	113-1841804-7825063	XA-HPMT-VT3C	Order Payment	Product charges		$18.73	1	"Cottonelle Ultra Comfort Care Toilet Paper, Bath Tissue, 6 Mega Toilet Paper Rolls"
+"Jun 6, 2019"	113-1841804-7825063	XA-HPMT-VT3C	Order Payment	Promo rebates		$0.00	1	"Cottonelle Ultra Comfort Care Toilet Paper, Bath Tissue, 6 Mega Toilet Paper Rolls"
+"Jun 5, 2019"	114-8749863-8308245	WH-LHMP-I6IG	Order Payment	Amazon fees	FBA Pick & Pack Fee	$-5.26		"Africa Ankara Supreme Wax Print 6 Yards Fabric (Multicolor) 100% Soft Cotton. Can be Made into Tops, Dresses, Skirts, Pants & so Much More"
+"Jun 5, 2019"	114-8749863-8308245	WH-LHMP-I6IG	Order Payment	Amazon fees	Referral Fee on Item Price	$-6.60		"Africa Ankara Supreme Wax Print 6 Yards Fabric (Multicolor) 100% Soft Cotton. Can be Made into Tops, Dresses, Skirts, Pants & so Much More"
+"Jun 5, 2019"	114-8749863-8308245	WH-LHMP-I6IG	Order Payment	Product charges		$43.99	1	"Africa Ankara Supreme Wax Print 6 Yards Fabric (Multicolor) 100% Soft Cotton. Can be Made into Tops, Dresses, Skirts, Pants & so Much More"
+"Jun 5, 2019"	114-8749863-8308245	WH-LHMP-I6IG	Order Payment	Promo rebates		$0.00	1	"Africa Ankara Supreme Wax Print 6 Yards Fabric (Multicolor) 100% Soft Cotton. Can be Made into Tops, Dresses, Skirts, Pants & so Much More"
+"Jun 5, 2019"	114-8749863-8308245	WH-LHMP-I6IG	Order Payment	Promo rebates	Shipping	$-4.26		"Africa Ankara Supreme Wax Print 6 Yards Fabric (Multicolor) 100% Soft Cotton. Can be Made into Tops, Dresses, Skirts, Pants & so Much More"
+"Jun 5, 2019"	114-8749863-8308245	WH-LHMP-I6IG	Order Payment	Other	Product Tax	$3.90		"Africa Ankara Supreme Wax Print 6 Yards Fabric (Multicolor) 100% Soft Cotton. Can be Made into Tops, Dresses, Skirts, Pants & so Much More"
+"Jun 5, 2019"	114-8749863-8308245	WH-LHMP-I6IG	Order Payment	Other	Shipping	$4.26		"Africa Ankara Supreme Wax Print 6 Yards Fabric (Multicolor) 100% Soft Cotton. Can be Made into Tops, Dresses, Skirts, Pants & so Much More"
+"Jun 5, 2019"	113-4253008-6229804	SW-1GG0-B8YE	Order Payment	Amazon fees	FBA Pick & Pack Fee	$-4.76		EcoSmart 65W Equivalent Soft White (2700K) BR30 Dimmable LED Light Bulb (3-Pack)
+"Jun 5, 2019"	113-4253008-6229804	SW-1GG0-B8YE	Order Payment	Amazon fees	Referral Fee on Item Price	$-2.24		EcoSmart 65W Equivalent Soft White (2700K) BR30 Dimmable LED Light Bulb (3-Pack)
+"Jun 5, 2019"	113-4253008-6229804	SW-1GG0-B8YE	Order Payment	Product charges		$14.95	1	EcoSmart 65W Equivalent Soft White (2700K) BR30 Dimmable LED Light Bulb (3-Pack)
+"Jun 5, 2019"	113-4253008-6229804	SW-1GG0-B8YE	Order Payment	Other	Product Tax	$0.90		EcoSmart 65W Equivalent Soft White (2700K) BR30 Dimmable LED Light Bulb (3-Pack)
+"Jun 4, 2019"	111-9831889-1024235	6B-3GVP-LTSP	Order Payment	Amazon fees	FBA Pick & Pack Fee	$-4.76		Wholesale African Ankara Wax Fabric 6 Yards (Brown/Black)
+"Jun 4, 2019"	111-9831889-1024235	6B-3GVP-LTSP	Order Payment	Amazon fees	Referral Fee on Item Price	$-5.94		Wholesale African Ankara Wax Fabric 6 Yards (Brown/Black)
+"Jun 4, 2019"	111-9831889-1024235	6B-3GVP-LTSP	Order Payment	Product charges		$39.59	1	Wholesale African Ankara Wax Fabric 6 Yards (Brown/Black)
+"Jun 4, 2019"			Service Fees	Amazon fees	FBA Prep Fee: Bubble Wrapping	$-9.60		
+"Jun 4, 2019"			Service Fees	Amazon fees	FBA Prep Fee: Labeling	$-2.40		
+"Jun 4, 2019"	114-2444452-1654657	9K-WG55-QESZ	Refund	Amazon fees	Referral Fee on Item Price	$5.99		Pukido African Print Fabric 6 Yards of African Fabric African Wax Prints Fabric Super Java Wax Ankara Fabric for Dress XM111506
+"Jun 4, 2019"	114-2444452-1654657	9K-WG55-QESZ	Refund	Amazon fees	Shipping commission	$0.74		Pukido African Print Fabric 6 Yards of African Fabric African Wax Prints Fabric Super Java Wax Ankara Fabric for Dress XM111506
+"Jun 4, 2019"	114-2444452-1654657	9K-WG55-QESZ	Refund	Product charges		$-39.95	1	Pukido African Print Fabric 6 Yards of African Fabric African Wax Prints Fabric Super Java Wax Ankara Fabric for Dress XM111506
+"Jun 4, 2019"	114-2444452-1654657	9K-WG55-QESZ	Refund	Other	Shipping	$-4.90		Pukido African Print Fabric 6 Yards of African Fabric African Wax Prints Fabric Super Java Wax Ankara Fabric for Dress XM111506
+"Jun 4, 2019"	113-9727651-7565820		Shipping services purchased through Amazon	Amazon fees	Transaction Fee	$0.00		
+"Jun 4, 2019"	113-9727651-7565820		Shipping services purchased through Amazon	Shipping Service Charges	Delivery Confirmation	$0.00		
+"Jun 4, 2019"	113-9727651-7565820		Shipping services purchased through Amazon	Shipping Service Charges	Shipping Label	$-6.95		
+"Jun 4, 2019"	111-8309545-1573056		Shipping services purchased through Amazon	Amazon fees	Transaction Fee	$0.00		
+"Jun 4, 2019"	111-8309545-1573056		Shipping services purchased through Amazon	Shipping Service Charges	Delivery Confirmation	$0.00		
+"Jun 4, 2019"	111-8309545-1573056		Shipping services purchased through Amazon	Shipping Service Charges	Shipping Label	$-6.95		
+"Jun 4, 2019"	113-9727651-7565820	18-ZAJS-NMUX	Order Payment	Amazon fees	Referral Fee on Item Price	$-7.49		Pukido 100% Cotton veritable Wax hollandais Guaranteed Dutch Super Wax hollandais African Wax Prints Fabric 6yards 2019 Ankara Fabric - (Color: as Pic
+"Jun 4, 2019"	113-9727651-7565820	18-ZAJS-NMUX	Order Payment	Amazon fees	Shipping commission	$-1.35		Pukido 100% Cotton veritable Wax hollandais Guaranteed Dutch Super Wax hollandais African Wax Prints Fabric 6yards 2019 Ankara Fabric - (Color: as Pic
+"Jun 4, 2019"	113-9727651-7565820	18-ZAJS-NMUX	Order Payment	Product charges		$49.95	1	Pukido 100% Cotton veritable Wax hollandais Guaranteed Dutch Super Wax hollandais African Wax Prints Fabric 6yards 2019 Ankara Fabric - (Color: as Pic
+"Jun 4, 2019"	113-9727651-7565820	18-ZAJS-NMUX	Order Payment	Other	Shipping	$9.00		Pukido 100% Cotton veritable Wax hollandais Guaranteed Dutch Super Wax hollandais African Wax Prints Fabric 6yards 2019 Ankara Fabric - (Color: as Pic
+"Jun 4, 2019"	111-8309545-1573056	ZW-ISC9-IMRD	Order Payment	Amazon fees	Referral Fee on Item Price	$-6.60		Africa Ankara Supreme Wax Print 6 Yards Fabric (Multicolor)
+"Jun 4, 2019"	111-8309545-1573056	ZW-ISC9-IMRD	Order Payment	Amazon fees	Shipping commission	$-1.35		Africa Ankara Supreme Wax Print 6 Yards Fabric (Multicolor)
+"Jun 4, 2019"	111-8309545-1573056	ZW-ISC9-IMRD	Order Payment	Product charges		$43.99	1	Africa Ankara Supreme Wax Print 6 Yards Fabric (Multicolor)
+"Jun 4, 2019"	111-8309545-1573056	ZW-ISC9-IMRD	Order Payment	Other	Shipping	$9.00		Africa Ankara Supreme Wax Print 6 Yards Fabric (Multicolor)
+"Jun 4, 2019"	112-7121923-9095463		Shipping services purchased through Amazon	Amazon fees	Transaction Fee	$0.00		
+"Jun 4, 2019"	112-7121923-9095463		Shipping services purchased through Amazon	Shipping Service Charges	Delivery Confirmation	$0.00		
+"Jun 4, 2019"	112-7121923-9095463		Shipping services purchased through Amazon	Shipping Service Charges	Shipping Label	$-6.95		
+"Jun 4, 2019"	112-7121923-9095463	18-ZAJS-NMUX	Order Payment	Amazon fees	Referral Fee on Item Price	$-7.49		Pukido 100% Cotton veritable Wax hollandais Guaranteed Dutch Super Wax hollandais African Wax Prints Fabric 6yards 2019 Ankara Fabric - (Color: as Pic
+"Jun 4, 2019"	112-7121923-9095463	18-ZAJS-NMUX	Order Payment	Amazon fees	Shipping commission	$-1.35		Pukido 100% Cotton veritable Wax hollandais Guaranteed Dutch Super Wax hollandais African Wax Prints Fabric 6yards 2019 Ankara Fabric - (Color: as Pic
+"Jun 4, 2019"	112-7121923-9095463	18-ZAJS-NMUX	Order Payment	Product charges		$49.95	1	Pukido 100% Cotton veritable Wax hollandais Guaranteed Dutch Super Wax hollandais African Wax Prints Fabric 6yards 2019 Ankara Fabric - (Color: as Pic
+"Jun 4, 2019"	112-7121923-9095463	18-ZAJS-NMUX	Order Payment	Other	Shipping	$9.00		Pukido 100% Cotton veritable Wax hollandais Guaranteed Dutch Super Wax hollandais African Wax Prints Fabric 6yards 2019 Ankara Fabric - (Color: as Pic
+"Jun 4, 2019"	114-6542608-0375429	CC-PPT9-O3HZ	Order Payment	Amazon fees	FBA Pick & Pack Fee	$-6.40		Hampton Bay Solar Bronze Outdoor Integrated LED 3000K 6-Lumens Landscape Pathway Light (6-Pack)
+"Jun 4, 2019"	114-6542608-0375429	CC-PPT9-O3HZ	Order Payment	Amazon fees	Referral Fee on Item Price	$-3.29		Hampton Bay Solar Bronze Outdoor Integrated LED 3000K 6-Lumens Landscape Pathway Light (6-Pack)
+"Jun 4, 2019"	114-6542608-0375429	CC-PPT9-O3HZ	Order Payment	Product charges		$21.91	1	Hampton Bay Solar Bronze Outdoor Integrated LED 3000K 6-Lumens Landscape Pathway Light (6-Pack)
+"Jun 3, 2019"			Service Fees	Amazon fees	FBA Prep Fee: Labeling	$-2.80		
+"Jun 3, 2019"			Service Fees	Amazon fees	FBA Prep Fee: Labeling	$-0.60		
+"Jun 3, 2019"			Service Fees	Amazon fees	FBA Prep Fee: Bubble Wrapping	$-11.20		
+"Jun 3, 2019"			Service Fees	Amazon fees	FBA Prep Fee: Bubble Wrapping	$-2.40		
+"Jun 3, 2019"	113-3133007-8835433		Shipping services purchased through Amazon	Amazon fees	Transaction Fee	$0.00		
+"Jun 3, 2019"	113-3133007-8835433		Shipping services purchased through Amazon	Shipping Service Charges	Delivery Confirmation	$0.00		
+"Jun 3, 2019"	113-3133007-8835433		Shipping services purchased through Amazon	Shipping Service Charges	Shipping Label	$-6.95		
+"Jun 3, 2019"	113-3133007-8835433	NX-EYUN-DZII	Order Payment	Amazon fees	Referral Fee on Item Price	$-5.99		"African ankara fabric African wax Print fabric for sewing dress Clothing Designs Wax Material For Fashion, Dresses, Top, Skirt, Jewelry, Shoes, Bags,"
+"Jun 3, 2019"	113-3133007-8835433	NX-EYUN-DZII	Order Payment	Amazon fees	Shipping commission	$-0.74		"African ankara fabric African wax Print fabric for sewing dress Clothing Designs Wax Material For Fashion, Dresses, Top, Skirt, Jewelry, Shoes, Bags,"
+"Jun 3, 2019"	113-3133007-8835433	NX-EYUN-DZII	Order Payment	Product charges		$39.95	1	"African ankara fabric African wax Print fabric for sewing dress Clothing Designs Wax Material For Fashion, Dresses, Top, Skirt, Jewelry, Shoes, Bags,"
+"Jun 3, 2019"	113-3133007-8835433	NX-EYUN-DZII	Order Payment	Other	Shipping	$4.90		"African ankara fabric African wax Print fabric for sewing dress Clothing Designs Wax Material For Fashion, Dresses, Top, Skirt, Jewelry, Shoes, Bags,"
+"Jun 3, 2019"	111-6096313-3401046		Shipping services purchased through Amazon	Amazon fees	Transaction Fee	$0.00		
+"Jun 3, 2019"	111-6096313-3401046		Shipping services purchased through Amazon	Shipping Service Charges	Delivery Confirmation	$0.00		
+"Jun 3, 2019"	111-6096313-3401046		Shipping services purchased through Amazon	Shipping Service Charges	Shipping Label	$-7.55		
+"Jun 3, 2019"	111-6096313-3401046	CX-8ML9-PTCL	Order Payment	Amazon fees	Referral Fee on Item Price	$-12.33		Ethnic Fabric Prints Real Wax Blue Yellow Star Design rw2632
+"Jun 3, 2019"	111-6096313-3401046	CX-8ML9-PTCL	Order Payment	Amazon fees	Shipping commission	$-1.35		Ethnic Fabric Prints Real Wax Blue Yellow Star Design rw2632
+"Jun 3, 2019"	111-6096313-3401046	CX-8ML9-PTCL	Order Payment	Product charges		$82.18	2	Ethnic Fabric Prints Real Wax Blue Yellow Star Design rw2632
+"Jun 3, 2019"	111-6096313-3401046	CX-8ML9-PTCL	Order Payment	Other	Shipping	$9.00		Ethnic Fabric Prints Real Wax Blue Yellow Star Design rw2632
+"Jun 3, 2019"	113-1844296-8697861		Shipping services purchased through Amazon	Amazon fees	Transaction Fee	$0.00		
+"Jun 3, 2019"	113-1844296-8697861		Shipping services purchased through Amazon	Shipping Service Charges	Delivery Confirmation	$0.00		
+"Jun 3, 2019"	113-1844296-8697861		Shipping services purchased through Amazon	Shipping Service Charges	Shipping Label	$-6.95		
+"Jun 3, 2019"	114-6134680-8033018	U5-EACQ-9JC5	Order Payment	Amazon fees	Referral Fee on Item Price	$-6.00		Africa Ankara Supreme Wax Print Black/White
+"Jun 3, 2019"	114-6134680-8033018	U5-EACQ-9JC5	Order Payment	Amazon fees	Shipping commission	$-0.73		Africa Ankara Supreme Wax Print Black/White
+"Jun 3, 2019"	114-6134680-8033018	U5-EACQ-9JC5	Order Payment	Product charges		$39.99	1	Africa Ankara Supreme Wax Print Black/White
+"Jun 3, 2019"	114-6134680-8033018	U5-EACQ-9JC5	Order Payment	Other	Shipping	$4.90		Africa Ankara Supreme Wax Print Black/White
+"Jun 3, 2019"	111-3790722-5746628		Shipping services purchased through Amazon	Amazon fees	Transaction Fee	$0.00		
+"Jun 3, 2019"	111-3790722-5746628		Shipping services purchased through Amazon	Shipping Service Charges	Delivery Confirmation	$0.00		
+"Jun 3, 2019"	111-3790722-5746628		Shipping services purchased through Amazon	Shipping Service Charges	Shipping Label	$-6.95		
+"Jun 3, 2019"	113-1844296-8697861	ZW-ISC9-IMRD	Order Payment	Amazon fees	Referral Fee on Item Price	$-6.60		Africa Ankara Supreme Wax Print 6 Yards Fabric (Multicolor)
+"Jun 3, 2019"	113-1844296-8697861	ZW-ISC9-IMRD	Order Payment	Amazon fees	Shipping commission	$-1.35		Africa Ankara Supreme Wax Print 6 Yards Fabric (Multicolor)
+"Jun 3, 2019"	113-1844296-8697861	ZW-ISC9-IMRD	Order Payment	Product charges		$43.99	1	Africa Ankara Supreme Wax Print 6 Yards Fabric (Multicolor)
+"Jun 3, 2019"	113-1844296-8697861	ZW-ISC9-IMRD	Order Payment	Other	Shipping	$9.00		Africa Ankara Supreme Wax Print 6 Yards Fabric (Multicolor)
+"Jun 3, 2019"	111-3790722-5746628	HE-60TY-1ZIP	Order Payment	Amazon fees	Referral Fee on Item Price	$-6.90		Africa Ankara Big Flower Pattern Supreme 6 Yards Fabrics
+"Jun 3, 2019"	111-3790722-5746628	HE-60TY-1ZIP	Order Payment	Amazon fees	Shipping commission	$-1.35		Africa Ankara Big Flower Pattern Supreme 6 Yards Fabrics
+"Jun 3, 2019"	111-3790722-5746628	HE-60TY-1ZIP	Order Payment	Product charges		$46.00	1	Africa Ankara Big Flower Pattern Supreme 6 Yards Fabrics
+"Jun 3, 2019"	111-3790722-5746628	HE-60TY-1ZIP	Order Payment	Other	Shipping	$9.00		Africa Ankara Big Flower Pattern Supreme 6 Yards Fabrics
+"Jun 3, 2019"	114-6134680-8033018		Shipping services purchased through Amazon	Amazon fees	Transaction Fee	$0.00		
+"Jun 3, 2019"	114-6134680-8033018		Shipping services purchased through Amazon	Shipping Service Charges	Delivery Confirmation	$0.00		
+"Jun 3, 2019"	114-6134680-8033018		Shipping services purchased through Amazon	Shipping Service Charges	Shipping Label	$-6.95		
+"Jun 3, 2019"	112-4319233-9313022	6H-V0MQ-KJS7	Order Payment	Amazon fees	FBA Pick & Pack Fee	$-15.78		KENT'E African Ankara Supreme Wax Print
+"Jun 3, 2019"	112-4319233-9313022	6H-V0MQ-KJS7	Order Payment	Amazon fees	Referral Fee on Item Price	$-19.77		KENT'E African Ankara Supreme Wax Print
+"Jun 3, 2019"	112-4319233-9313022	6H-V0MQ-KJS7	Order Payment	Product charges		$43.95	1	KENT'E African Ankara Supreme Wax Print
+"Jun 3, 2019"	112-4319233-9313022	6H-V0MQ-KJS7	Order Payment	Product charges		$43.95	1	KENT'E African Ankara Supreme Wax Print
+"Jun 3, 2019"	112-4319233-9313022	6H-V0MQ-KJS7	Order Payment	Product charges		$43.95	1	KENT'E African Ankara Supreme Wax Print
+"Jun 2, 2019"			Service Fees	Amazon fees	FBA Amazon-Partnered Carrier Shipment Fee	$-4.06		
+"Jun 2, 2019"			Service Fees	Amazon fees	FBA Prep Fee: Labeling	$-1.60		
+"Jun 2, 2019"			Service Fees	Amazon fees	FBA Amazon-Partnered Carrier Shipment Fee	$-4.06		
+"Jun 2, 2019"			Service Fees	Amazon fees	FBA Amazon-Partnered Carrier Shipment Fee	$-4.77		
+"Jun 2, 2019"			Service Fees	Amazon fees	FBA Amazon-Partnered Carrier Shipment Fee	$-5.27		
+"Jun 2, 2019"			Service Fees	Amazon fees	FBA Amazon-Partnered Carrier Shipment Fee	$-6.15		
+"Jun 2, 2019"			Service Fees	Amazon fees	FBA Amazon-Partnered Carrier Shipment Fee	$-5.85		
+"Jun 2, 2019"			Service Fees	Amazon fees	FBA Amazon-Partnered Carrier Shipment Fee	$-10.02		
+"Jun 2, 2019"	114-9122410-7839443	IN-XNHX-TA8T	Order Payment	Amazon fees	FBA Pick & Pack Fee	$-10.52		KENT'E African Ankara Supreme Wax Print
+"Jun 2, 2019"	114-9122410-7839443	IN-XNHX-TA8T	Order Payment	Amazon fees	Referral Fee on Item Price	$-12.00		KENT'E African Ankara Supreme Wax Print
+"Jun 2, 2019"	114-9122410-7839443	IN-XNHX-TA8T	Order Payment	Product charges		$39.99	1	KENT'E African Ankara Supreme Wax Print
+"Jun 2, 2019"	114-9122410-7839443	IN-XNHX-TA8T	Order Payment	Product charges		$39.99	1	KENT'E African Ankara Supreme Wax Print
+"Jun 2, 2019"	114-9122410-7839443	IN-XNHX-TA8T	Order Payment	Promo rebates		$0.00	1	KENT'E African Ankara Supreme Wax Print
+"Jun 2, 2019"	114-9122410-7839443	IN-XNHX-TA8T	Order Payment	Promo rebates		$0.00	1	KENT'E African Ankara Supreme Wax Print
+"Jun 2, 2019"	114-9122410-7839443	IN-XNHX-TA8T	Order Payment	Promo rebates	Shipping	$-8.67		KENT'E African Ankara Supreme Wax Print
+"Jun 2, 2019"	114-9122410-7839443	IN-XNHX-TA8T	Order Payment	Other	Shipping	$8.67		KENT'E African Ankara Supreme Wax Print
+"Jun 2, 2019"	113-7832164-7803416	WH-LHMP-I6IG	Order Payment	Amazon fees	FBA Pick & Pack Fee	$-5.26		"Africa Ankara Supreme Wax Print 6 Yards Fabric (Multicolor) 100% Soft Cotton. Can be Made into Tops, Dresses, Skirts, Pants & so Much More"
+"Jun 2, 2019"	113-7832164-7803416	WH-LHMP-I6IG	Order Payment	Amazon fees	Referral Fee on Item Price	$-6.60		"Africa Ankara Supreme Wax Print 6 Yards Fabric (Multicolor) 100% Soft Cotton. Can be Made into Tops, Dresses, Skirts, Pants & so Much More"
+"Jun 2, 2019"	113-7832164-7803416	WH-LHMP-I6IG	Order Payment	Product charges		$43.99	1	"Africa Ankara Supreme Wax Print 6 Yards Fabric (Multicolor) 100% Soft Cotton. Can be Made into Tops, Dresses, Skirts, Pants & so Much More"
+"Jun 2, 2019"			Service Fees	Transaction Details	Cost of Advertising	$-6.98		
+"Jun 1, 2019"			Service Fees	Amazon fees	FBA Amazon-Partnered Carrier Shipment Fee	$-5.35		
+"Jun 1, 2019"	112-6797359-9008237	CC-PPT9-O3HZ	Order Payment	Amazon fees	FBA Pick & Pack Fee	$-6.40		Hampton Bay Solar Bronze Outdoor Integrated LED 3000K 6-Lumens Landscape Pathway Light (6-Pack)
+"Jun 1, 2019"	112-6797359-9008237	CC-PPT9-O3HZ	Order Payment	Amazon fees	Referral Fee on Item Price	$-3.29		Hampton Bay Solar Bronze Outdoor Integrated LED 3000K 6-Lumens Landscape Pathway Light (6-Pack)
+"Jun 1, 2019"	112-6797359-9008237	CC-PPT9-O3HZ	Order Payment	Product charges		$21.91	1	Hampton Bay Solar Bronze Outdoor Integrated LED 3000K 6-Lumens Landscape Pathway Light (6-Pack)
+"Jun 1, 2019"	112-6797359-9008237	CC-PPT9-O3HZ	Order Payment	Promo rebates		$0.00	1	Hampton Bay Solar Bronze Outdoor Integrated LED 3000K 6-Lumens Landscape Pathway Light (6-Pack)

@@ -28,9 +28,6 @@ namespace ProfitApp
         public MainWindow()
         {
             InitializeComponent();
-            ReportsGrid.Visibility = Visibility.Visible;
-            ItemsGrid.Visibility = Visibility.Collapsed;
-            SettingsGrid.Visibility = Visibility.Collapsed;
             vm = new MainViewModel();
             DataContext = vm;
         }
@@ -41,15 +38,6 @@ namespace ProfitApp
             if (fileDialog.ShowDialog() == true)
             {
                 vm.ProfitFileLocation = fileDialog.FileName;
-            }
-        }
-
-        private void DatabaseSearchFolders_Click(object sender, RoutedEventArgs e)
-        {
-            var fileDialog = new OpenFileDialog();
-            if (fileDialog.ShowDialog() == true)
-            {
-                vm.DatabaseLocation = fileDialog.FileName;
             }
         }
 
@@ -73,7 +61,6 @@ namespace ProfitApp
 
         private void UploadReport_Click(object sender, RoutedEventArgs e)
         {
-            SaveProfit_Click(sender, e);
             vm.GetReport();
             ResetDataGrid();
         }
@@ -162,28 +149,21 @@ namespace ProfitApp
 
         private void SaveProfit_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(vm.DatabaseLocation))
-            {
-                SaveFileDialog saveFileDialog1 = new SaveFileDialog();
-                saveFileDialog1.Filter = "sqlite3 files (*.sqlite3)|*.txt|All files (*.*)|*.*";
-                saveFileDialog1.FilterIndex = 2;
-                saveFileDialog1.RestoreDirectory = true;
+            Stream myStream;
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
 
-                if (saveFileDialog1.ShowDialog() == true)
+            saveFileDialog1.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
+            saveFileDialog1.FilterIndex = 2;
+            saveFileDialog1.RestoreDirectory = true;
+
+            if (saveFileDialog1.ShowDialog() == true)
+            {
+                if ((myStream = saveFileDialog1.OpenFile()) != null)
                 {
-                    if(!string.IsNullOrWhiteSpace(saveFileDialog1.FileName))
-                    {
-                        vm.DatabaseLocation = saveFileDialog1.FileName;
-                        vm.SaveOrderItemListToFile();
-                    }
+                    vm.SaveOrderItemListToFile(myStream);
+                    myStream.Close();
                 }
             }
-            else
-            {
-                vm.SaveOrderItemListToFile();
-
-            }
-
         }
 
         private void DataGridProfit_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
@@ -207,9 +187,9 @@ namespace ProfitApp
             SettingsGrid.Visibility = Visibility.Visible;
         }
 
-        private void OpenDatabase_Click(object sender, RoutedEventArgs e)
+        private void Import_Click(object sender, RoutedEventArgs e)
         {
-            vm.OpenDatabase();
+            vm.Import();
         }
     }
 }

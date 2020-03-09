@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ProfitLibrary
 {
-    public class MainViewModel : ViewModel
+    public class MainViewModel: ViewModel
     {
         private ObservableCollection<OrderItem> orderItems;
         private string itemListLocation;
@@ -17,14 +17,12 @@ namespace ProfitLibrary
         private ObservableCollection<Item> itemList;
         private string profitFileLocation;
         public IProfitDatabase ProfitDB;
-        private string databaseLocation;
-
         public ObservableCollection<Item> ItemList
         {
             get => itemList;
             set
             {
-                itemList = value;
+                itemList = value;            
                 OnPropertyChanged();
             }
         }
@@ -37,7 +35,7 @@ namespace ProfitLibrary
                 OnPropertyChanged();
             }
         }
-
+        
         public string ProfitFileLocation
         {
             get => profitFileLocation;
@@ -49,7 +47,7 @@ namespace ProfitLibrary
         }
         public string PayPalFileLocation
         {
-            get => paypalFileLocation;
+            get=> paypalFileLocation;
             set
             {
                 paypalFileLocation = value;
@@ -67,22 +65,11 @@ namespace ProfitLibrary
             }
         }
 
-        public string DatabaseLocation
-        {
-            get =>databaseLocation;
-            set
-            {
-                databaseLocation = value;
-                OnPropertyChanged();
-            }
-        }
-
-
         public MainViewModel()
         {
             ItemList = new ObservableCollection<Item>();
-
-
+            
+           
         }
 
         public void GetReport()
@@ -90,7 +77,7 @@ namespace ProfitLibrary
             GetItemListFromFile();
             GetOrderItemFromProfitReportFile();
             //GetOrderItemsFromAmazonFile();
-            //GetOrderItemsFromPayPalFile();
+            GetOrderItemsFromPayPalFile();
         }
 
         private void GetOrderItemsFromPayPalFile()
@@ -122,11 +109,11 @@ namespace ProfitLibrary
 
         private void GetOrderItemFromProfitReportFile()
         {
-            OrderItems = new ObservableCollection<OrderItem>(OrderItem.GetOrderItemList(ProfitFileLocation));
-            //OrderItems =new ObservableCollection<OrderItem>(ProfitDB.GetOrderItems());
+            //OrderItems = new ObservableCollection<OrderItem>(OrderItem.GetOrderItemList(ProfitFileLocation));
+            OrderItems =new ObservableCollection<OrderItem>(ProfitDB.GetOrderItems());
 
         }
-
+      
 
         //private void GetOrderItemsFromAmazonFile()
         //{
@@ -157,8 +144,8 @@ namespace ProfitLibrary
 
         public void GetItemListFromFile()
         {
-            ItemList = new ObservableCollection<Item>(Item.GetItemList(ItemListLocation));
-            //ItemList = new ObservableCollection<Item>(ProfitDB.GetItemList());
+            //itemList = new ObservableCollection<Item>(Item.GetItemList(ItemListLocation));
+            ItemList = new ObservableCollection<Item>(ProfitDB.GetItemList());
         }
 
         public void AutoCreateItems()
@@ -182,7 +169,7 @@ namespace ProfitLibrary
 
             ItemList = itemList;
         }
-
+        
         public void SaveItemListToFile(Stream stream)
         {
             using (Stream writetext = stream)
@@ -197,11 +184,10 @@ namespace ProfitLibrary
             }
         }
 
-        public void OpenDatabase()
+        public void Import()
         {
-            ProfitDB = new ProfitDatabase(DatabaseLocation);
-            ItemList = new ObservableCollection<Item>(ProfitDB.GetItemList());
-            OrderItems = new ObservableCollection<OrderItem>(ProfitDB.GetOrderItems());
+            ProfitDB = new ProfitDatabase(string.Empty);
+            ProfitDB.CreateDatabase(ProfitFileLocation, ItemListLocation);
         }
 
         public void AutoAssign()
@@ -237,14 +223,14 @@ namespace ProfitLibrary
                     x.Assigned = true;
                 });
 
-                itemList.ToList().ForEach((x) =>
+                itemList.ToList().ForEach((x) => 
                 {
                     x.QuantitySold = 0;
                     x.Profit = 0;
                     long totalProfit = 0;
-                    foreach (var orderItem in orderItems)
+                    foreach(var orderItem in orderItems)
                     {
-                        if (orderItem.SKU == x.SKU || orderItem.SKU == x.AmazonSKU || orderItem.SKU == x.EbaySKU)
+                        if(orderItem.SKU == x.SKU || orderItem.SKU == x.AmazonSKU || orderItem.SKU == x.EbaySKU)
                         {
                             x.QuantitySold += orderItem.QuantitySold;
                             totalProfit += orderItem.Profit;
@@ -253,13 +239,13 @@ namespace ProfitLibrary
 
                     x.MoneyBack = (x.QuantitySold * x.ItemCost) + totalProfit;
 
-                    EnsureItemCalculations(ref x);
+                    EnsureItemCalculations(ref x);                    
                 });
             }
 
             OrderItems = orderItems;
 
-
+            
         }
 
         private void EnsureItemCalculations(ref Item item)
@@ -280,7 +266,6 @@ namespace ProfitLibrary
                         orderItems[orderItems.IndexOf(selectedOrderItem)].ItemName = item.Name;
                         orderItems[orderItems.IndexOf(selectedOrderItem)].ItemCost = -item.ItemCost;
                     }
-
                     break;
                 case "Item Cost":
                     orderItems[orderItems.IndexOf(selectedOrderItem)].ItemCost = PaymentDetail.ConvertDollarstoPennies(value);
@@ -294,12 +279,9 @@ namespace ProfitLibrary
                         orderItems[orderItems.IndexOf(selectedOrderItem)].SellingFees = -PaymentDetail.ConvertDollarstoPennies(value);
                     }
                     break;
-                default:
-                    break;
             }
 
             OrderItems = orderItems;
-            ProfitDB.Update("Orders", selectedOrderItem.ID, header, value);
         }
 
         private string GetEbayFee(string soldfor)
@@ -313,21 +295,18 @@ namespace ProfitLibrary
             return Math.Round(pp + ebay, 2).ToString();
         }
 
-        public void SaveOrderItemListToFile()
+        public void SaveOrderItemListToFile(Stream stream)
         {
-            ProfitDB = new ProfitDatabase(DatabaseLocation);
-            ProfitDB.SaveItemList(ItemList);
-            ProfitDB.SaveOrderList(OrderItems);
-            //using (Stream writetext = stream)
-            //{
-            //    var line = new UTF8Encoding(true).GetBytes($"Assigned;SKU;ItemName;OrderID;QuantitySold;DateSold;BoughtFrom;ItemCost;SalesTax;SoldFor;ShippingCost;SellingFees;Profit" + Environment.NewLine);
-            //    writetext.Write(line, 0, line.Length);
-            //    foreach (var item in OrderItems)
-            //    {
-            //        line = new UTF8Encoding(true).GetBytes($"{item.Assigned};{item.SKU};{item.ItemName};{item.OrderID};{item.QuantitySold};{item.DateSold};{item.BoughtFrom};{item.ItemCost};{item.SalesTax};{item.SoldFor};{item.ShippingCost};{item.SellingFees};{item.Profit}" + Environment.NewLine);
-            //        writetext.Write(line, 0, line.Length);
-            //    }
-            //}
+            using (Stream writetext = stream)
+            {
+                var line = new UTF8Encoding(true).GetBytes($"Assigned;SKU;ItemName;OrderID;QuantitySold;DateSold;BoughtFrom;ItemCost;SalesTax;SoldFor;ShippingCost;SellingFees;Profit" + Environment.NewLine);
+                writetext.Write(line, 0, line.Length);
+                foreach (var item in OrderItems)
+                {
+                    line = new UTF8Encoding(true).GetBytes($"{item.Assigned};{item.SKU};{item.ItemName};{item.OrderID};{item.QuantitySold};{item.DateSold};{item.BoughtFrom};{item.ItemCost};{item.SalesTax};{item.SoldFor};{item.ShippingCost};{item.SellingFees};{item.Profit}" + Environment.NewLine);
+                    writetext.Write(line, 0, line.Length);
+                }
+            }
         }
 
         public void CreateItemReport()
@@ -339,12 +318,12 @@ namespace ProfitLibrary
 
         public void DeletedItemsFromItemList(IList<Item> items)
         {
-            if (items == null || itemList == null)
+            if(items == null || itemList == null)
             {
                 return;
             }
 
-            foreach (var item in items)
+            foreach(var item in items)
             {
                 itemList?.Remove(item);
             }
@@ -353,7 +332,7 @@ namespace ProfitLibrary
         }
 
         public void EditItemListItem(Item selectedItem, string header, string value)
-        {
+        {            
             switch (header)
             {
                 case "SKU":
@@ -377,16 +356,12 @@ namespace ProfitLibrary
                 case "Quantity Sold":
                     itemList[itemList.IndexOf(selectedItem)].QuantitySold = int.Parse(value);
                     break;
-                default:
-                    break;
             }
 
             selectedItem.SKU = string.IsNullOrWhiteSpace(selectedItem.SKU) ? itemList.Count.ToString() : selectedItem.SKU;
             EnsureItemCalculations(ref selectedItem);
             itemList[itemList.IndexOf(selectedItem)] = selectedItem;
             ItemList = itemList;
-            ProfitDB.Update("Items", selectedItem.ID, header, value);
-
         }
     }
 }
