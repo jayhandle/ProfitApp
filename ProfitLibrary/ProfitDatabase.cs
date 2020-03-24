@@ -34,8 +34,8 @@ namespace ProfitLibrary
                 i.ID = int.Parse(item["id"].ToString());
                 i.SKU = (string)item["sku"];
                 i.Name = (string)item["name"];
-                i.AmazonSKU = (string)item["amazon_sku"];
-                i.EbaySKU = (string)item["ebay_sku"];
+                i.AmazonSKU = (string)(item["amazon_sku"]?? string.Empty);
+                i.EbaySKU = (string)(item["ebay_sku"]?? string.Empty);
                 i.ItemCost = (long)item["item_cost"];
                 i.QuantityBought = int.Parse(item["quantity_bought"].ToString());
                 i.QuantitySold = int.Parse(item["quantity_sold"].ToString());
@@ -78,7 +78,7 @@ namespace ProfitLibrary
                 var o = new OrderItem();
 
                 o.ID = int.Parse(orderitem["id"].ToString());
-                o.Assigned = orderitem["assigned"].ToString() == "1";
+                o.Assigned = orderitem["assigned"].ToString() == "1" || orderitem["assigned"].ToString().ToLower() == "true";
                 o.SKU = (string)orderitem["sku"];
                 o.ItemName = (string)orderitem["item_name"];
                 o.OrderID = (string)orderitem["order_id"];
@@ -159,9 +159,9 @@ namespace ProfitLibrary
             var data = new List<object>
             {
                 { item.SKU },
-                { item.Name},
-                { item.AmazonSKU},
-                { item.EbaySKU},
+                { item.Name ?? string.Empty},
+                { item.AmazonSKU ?? string.Empty},
+                { item.EbaySKU??string.Empty},
                 { item.ItemCost},
                 { item.QuantityBought},
                 { item.QuantitySold},
@@ -182,12 +182,12 @@ namespace ProfitLibrary
             var data = new List<object>
             {
                 { order.Assigned},
-                { order.SKU},
-                { order.ItemName},
-                { order.OrderID},
+                { order.SKU ?? string.Empty},
+                { order.ItemName ?? string.Empty},
+                { order.OrderID ?? string.Empty},
                 { order.QuantitySold},
-                { order.DateSold},
-                { order.BoughtFrom},
+                { order.DateSold ?? string.Empty},
+                { order.BoughtFrom ?? string.Empty},
                 { order.ItemCost},
                 { order.SalesTax},
                 { order.SoldFor},
@@ -257,7 +257,7 @@ namespace ProfitLibrary
             //}
         }
 
-        public void Update(string Table, int row, string column, string value)
+        public int Update(string Table, int row, string column, string value)
         {
             switch(column)
             {
@@ -271,14 +271,73 @@ namespace ProfitLibrary
                     column = "selling_fee";
                     value = PaymentDetail.ConvertDollarstoPennies(value).ToString();
                     break;
+                case "Item Name":
+                    column = "item_name";
+                    break;
+                case "Quantity Bought":
+                    column = "quantity_bought";
+                    break;
+                case "Item Cost":
+                    column = "item_cost";
+                    value = PaymentDetail.ConvertDollarstoPennies(value).ToString();
+                    break;
+                case "SalesTax":
+                    column = "sale_tax";
+                    value = PaymentDetail.ConvertDollarstoPennies(value).ToString();
+                    break;
+                case "Quantity Sold":
+                    column = "quantity_sold";
+                    break;
+                case "Date Sold":
+                    column = "date_sold";
+                    break;
+                case "Bought From":
+                    column = "bought_from";
+                    break;
+                case "Sold For":
+                    column = "sold_for";
+                    value = PaymentDetail.ConvertDollarstoPennies(value).ToString();
+                    break;
+                case "Shipping Cost":
+                    column = "shipping_cost";
+                    value = PaymentDetail.ConvertDollarstoPennies(value).ToString();
+                    break;
+                case "Assigned":
+                case "assigned":
+                    value = value.ToLower()== "true" ? "1" : "0";
+                    break;
                 default:
                     break;
             }
-            var result = Database.Update(Table, row, new List<string> { column }, new List<object> { value });
-            if(result?.Result != "SUCCESS")
+            var result = Database.Update(Table, row, new List<string> { column.ToLower() }, new List<object> { value });
+            if(result?.Result.ToString() != "SUCCESS")
             {
-
+                return -1;
             }
+            else
+            {
+                try
+                {
+                    var num = int.Parse(result.Message.Split(':')[1]);
+                    return num;
+                }
+                catch
+                {
+                    return -1;
+                }
+            }
+        }
+
+        public string InsertItem(Item item)
+        {
+            var itemColumn = new List<string> { "sku", "name", "amazon_sku", "ebay_sku", "item_cost", "quantity_bought", "quantity_sold", "money_back", "profit" };
+            return Database.Insert("Items", itemColumn, convertItemForDatabase(item)).Result.ToString();      
+        }
+
+        public string InsertOrder(OrderItem order)
+        {
+            var profitColumn = new List<string> { "assigned", "sku", "item_name", "order_id", "quantity_sold", "date_sold", "bought_from", "item_cost", "sale_tax", "sold_for", "shipping_cost", "selling_fee", "profit" };
+            return Database.Insert("Orders", profitColumn, convertOrderForDatabase(order)).Result.ToString();            
         }
     }
 }

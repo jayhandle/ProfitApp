@@ -1,0 +1,12 @@
+﻿name: ebay-config
+api.sandbox.ebay.com:
+    appid: JessieUc-SellerCe-SBX-d796addd9-971dba15
+    certid: SBX-796addd9eb97-b76a-4ed0-bc69-5f8b
+    devid: 1d953e6f-497d-477f-b5f5-4e11c35ea348
+    redirecturi: Jessie_Uchendu-JessieUc-Seller-vzxfa
+api.ebay.com:
+    appid: JessieUc-SellerCe-PRD-0bcb87b90-045d19a3
+    certid: PRD-bcb87b90130b-1eb6-4c1d-b256-540f
+    devid: 1d953e6f-497d-477f-b5f5-4e11c35ea348
+    redirecturi: Jessie_Uchendu-JessieUc-Seller-aqrii
+

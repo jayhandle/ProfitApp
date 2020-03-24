@@ -4,11 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProfitApp"
+        xmlns:cefSharp="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
         xmlns:converter="clr-namespace:ProfitApp.Converters"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Window.Resources>
         <converter:PenniesToDollarsConverter x:Key="PenniesToDollarsConverter" />
+        <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -31,7 +33,7 @@
                 Content="  Setting  " Click="Settings_Click"/>
         </Grid>
         <Grid Grid.Row="1">
-            <Grid Name="ReportsGrid">
+            <Grid Name="ReportsGrid" d:IsHidden="True">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
@@ -137,7 +139,7 @@
                 <Button Grid.Row="3" 
                         Content="Save" Click="Save_Click"/>
             </Grid>
-            <Grid Name="SettingsGrid" d:IsHidden="True">
+            <Grid Name="SettingsGrid">
                 <StackPanel>
                     <GroupBox Header="Database Manager">
                         <StackPanel>
@@ -179,6 +181,26 @@
                                 <Button Grid.Column="3" Content="Search Folders" Click="ProfitSearchFolders_Click"/>
                             </Grid>
                             <Button Content="Import" Click="UploadReport_Click"/>
+                            <GroupBox Header="Ebay Transactions">
+                                <StackPanel>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Label Grid.Column="0" Content="Last Hit Date:"/>
+                                        <DatePicker Grid.Column="1" SelectedDate="{Binding LastHitDate}"/>
+                                    </Grid>
+                                    <Button Content="Import Transactions" Click="ImportEbayTransaction_Click"/>
+                                    <StackPanel>
+                                        <cefSharp:ChromiumWebBrowser x:Name="EbayWebBrowser" 
+                                                    Loaded="EbayWebBrowser_Loaded"
+                                                                     LoadingStateChanged="EbayWebBrowser_LoadingStateChanged"
+                                                    Visibility="{Binding EbayWebBrowserIsVisible , Converter={StaticResource BoolToVisibilityConverter}}"
+                                                                     Height="200"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </GroupBox>
                         </StackPanel>
                     </GroupBox>
                 </StackPanel>

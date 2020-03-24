@@ -10,11 +10,12 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ProfitLibrary</RootNamespace>
     <AssemblyName>ProfitLibrary</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -60,8 +61,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="APICommerce\EbayCommerceAPI.cs" />
+    <Compile Include="APICommerce\Transaction.cs" />
     <Compile Include="EbayReportUpload.cs" />
     <Compile Include="AmazonReportUpload.cs" />
+    <Compile Include="APICommerce\IAPICommerces.cs" />
     <Compile Include="IDatabase.cs" />
     <Compile Include="IDBResult.cs" />
     <Compile Include="IProfitDatabase.cs" />
@@ -101,7 +105,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <Content Include="ebay-config.yaml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Ebay\EbayApiStandard\EbayApiStandard.csproj">
+      <Project>{fb789836-bfc8-4e2d-bf74-b1452fa4878f}</Project>
+      <Name>EbayApiStandard</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

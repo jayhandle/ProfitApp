@@ -18,6 +18,9 @@ namespace ProfitLibrary
         private string profitFileLocation;
         public IProfitDatabase ProfitDB;
         private string databaseLocation;
+        private DateTime lastHitDate = DateTime.Now;
+        private bool ebayWebBrowserIsVisible;
+        private Uri getEbayAuthSource;
 
         public ObservableCollection<Item> ItemList
         {
@@ -69,7 +72,7 @@ namespace ProfitLibrary
 
         public string DatabaseLocation
         {
-            get =>databaseLocation;
+            get => databaseLocation;
             set
             {
                 databaseLocation = value;
@@ -77,12 +80,40 @@ namespace ProfitLibrary
             }
         }
 
+        public DateTime LastHitDate
+        {
+            get => lastHitDate;
+            set
+            {
+                lastHitDate = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool EbayWebBrowserIsVisible
+        {
+            get => ebayWebBrowserIsVisible;
+            private set
+            {
+                ebayWebBrowserIsVisible = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public Uri GetEbayAuthSource 
+        { 
+            get => getEbayAuthSource;
+            set
+            {
+                getEbayAuthSource = value;
+                OnPropertyChanged();
+            }
+        }
+        public EbayCommerceAPI ClientAPI { get; private set; }
 
         public MainViewModel()
         {
             ItemList = new ObservableCollection<Item>();
-
-
         }
 
         public void GetReport()
@@ -204,6 +235,45 @@ namespace ProfitLibrary
             OrderItems = new ObservableCollection<OrderItem>(ProfitDB.GetOrderItems());
         }
 
+        public void GetEbayBrowserVisiblity(Uri uri)
+        {
+            EbayWebBrowserIsVisible = false;
+            if (!ClientAPI.GetAccessToken(uri))
+            {
+                EbayWebBrowserIsVisible = true;
+            }
+
+        }
+
+        public void GetEbayTransaction()
+        {
+            var ebayTransactions = ClientAPI.GetTransactions(LastHitDate);
+            CompareEbayTransactionWithDatabaseTransaction(ebayTransactions);
+        }
+
+        private void CompareEbayTransactionWithDatabaseTransaction(List<Transaction> ebayTransactions)
+        {
+            if (OrderItems != null)
+            {
+                var newOrders = new List<OrderItem> (OrderItems.ToList());
+                foreach (var ebayTransaction in ebayTransactions)
+                {
+                    if (!OrderItems.ToList().Exists(o => o.OrderID == ebayTransaction.Order.OrderID && o.BoughtFrom == ebayTransaction.Order.BoughtFrom))
+                    {
+                        newOrders.Add(ebayTransaction.Order);
+                        ProfitDB.InsertOrder(ebayTransaction.Order);
+                    }
+                }
+
+                OrderItems = new ObservableCollection<OrderItem>(newOrders);
+            }
+        }
+
+        public bool HasEbayToken()
+        {
+            return ClientAPI.HasAccessToken();
+        }
+
         public void AutoAssign()
         {
             if (ItemList != null)
@@ -233,8 +303,9 @@ namespace ProfitLibrary
                     }
 
                     x.Profit = (x.SoldFor * x.QuantitySold) + x.ItemCost + x.SellingFees + x.ShippingCost;
-
+                    ProfitDB.Update("Orders", x.ID, "profit", x.Profit.ToString());
                     x.Assigned = true;
+                    ProfitDB.Update("Orders", x.ID, "assigned", x.Assigned.ToString());
                 });
 
                 itemList.ToList().ForEach((x) =>
@@ -254,12 +325,22 @@ namespace ProfitLibrary
                     x.MoneyBack = (x.QuantitySold * x.ItemCost) + totalProfit;
 
                     EnsureItemCalculations(ref x);
+                    ProfitDB.Update("Items", x.ID, "quantity_sold", x.QuantitySold.ToString());
+                    ProfitDB.Update("Items", x.ID, "money_back", x.MoneyBack.ToString());
+                    ProfitDB.Update("Items", x.ID, "profit", x.Profit.ToString());
                 });
             }
 
             OrderItems = orderItems;
 
 
+        }
+
+        public Uri GetAuthSource()
+        {
+            ClientAPI = new EbayCommerceAPI();
+            return ClientAPI.GetEbayAuthSource();
+            //var transactions = ClientAPI.GetTransactions(LastHitDate);
         }
 
         private void EnsureItemCalculations(ref Item item)
@@ -294,12 +375,23 @@ namespace ProfitLibrary
                         orderItems[orderItems.IndexOf(selectedOrderItem)].SellingFees = -PaymentDetail.ConvertDollarstoPennies(value);
                     }
                     break;
+                case "Selling Fees":
+                    orderItems[orderItems.IndexOf(selectedOrderItem)].SellingFees = PaymentDetail.ConvertDollarstoPennies(value);
+                    break;
                 default:
                     break;
             }
 
             OrderItems = orderItems;
-            ProfitDB.Update("Orders", selectedOrderItem.ID, header, value);
+            var result = ProfitDB.Update("Orders", selectedOrderItem.ID, header, value);
+            if (result == 0)
+            {
+                var response = ProfitDB.InsertOrder(selectedOrderItem);
+                if (response == "SUCCESS")
+                {
+                    selectedOrderItem.ID = OrderItems.Count();
+                }
+            }
         }
 
         private string GetEbayFee(string soldfor)
@@ -385,7 +477,15 @@ namespace ProfitLibrary
             EnsureItemCalculations(ref selectedItem);
             itemList[itemList.IndexOf(selectedItem)] = selectedItem;
             ItemList = itemList;
-            ProfitDB.Update("Items", selectedItem.ID, header, value);
+            var result = ProfitDB.Update("Items", selectedItem.ID, header, value);
+            if (result == 0)
+            {
+                var response = ProfitDB.InsertItem(selectedItem);
+                if (response == "SUCCESS")
+                {
+                    selectedItem.ID = ItemList.Count() - 1;
+                }
+            }
 
         }
     }

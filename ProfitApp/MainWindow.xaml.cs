@@ -24,7 +24,7 @@ namespace ProfitApp
     public partial class MainWindow : Window
     {
         private MainViewModel vm;
-
+        private string ebayAddress;
         public MainWindow()
         {
             InitializeComponent();
@@ -33,6 +33,7 @@ namespace ProfitApp
             SettingsGrid.Visibility = Visibility.Collapsed;
             vm = new MainViewModel();
             DataContext = vm;
+
         }
 
         private void ProfitSearchFolders_Click(object sender, RoutedEventArgs e)
@@ -210,6 +211,40 @@ namespace ProfitApp
         private void OpenDatabase_Click(object sender, RoutedEventArgs e)
         {
             vm.OpenDatabase();
+        }
+
+        private void ImportEbayTransaction_Click(object sender, RoutedEventArgs e)
+        {
+            EbayWebBrowser.Visibility = Visibility.Visible;
+            ebayAddress = vm.GetAuthSource().AbsoluteUri;
+            EbayWebBrowser.Address = ebayAddress;
+        }
+
+        private void EbayWebBrowser_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(EbayWebBrowser.Address))
+            {
+                vm.GetEbayBrowserVisiblity(new Uri(EbayWebBrowser.Address));
+            }
+        }
+
+        private void EbayWebBrowser_LoadingStateChanged(object sender, CefSharp.LoadingStateChangedEventArgs e)
+        {
+            this.Dispatcher.Invoke(() =>
+            {
+                ebayAddress = EbayWebBrowser.Address;
+            });
+            if (!e.IsLoading)
+            {
+                if (!string.IsNullOrWhiteSpace(ebayAddress))
+                {
+                    vm.GetEbayBrowserVisiblity(new Uri(ebayAddress));
+                }
+            }
+            if(vm.HasEbayToken())
+            {
+                vm.GetEbayTransaction();
+            }
         }
     }
 }

@@ -197,7 +197,7 @@ namespace ProfitLibrary
                 OpenConnection();
                 var rows = command.ExecuteNonQuery();
             
-                result.Message = $"Successfully updated items in the table. rows : {rows}.";
+                result.Message = $"Successfully updated items in the table. rows:{rows}";
                 result.Result = "SUCCESS";
 
         }

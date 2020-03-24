@@ -20,7 +20,7 @@ namespace ProfitLibrary
         private static int sales_tax = 8;
         private static int reviewed = 13;
         public int ID { get; set; }
-        public bool Assigned { get; set; }
+        public bool Assigned { get; set; } 
         public string SKU { get; set; }
         public string OrderID { get; set; }
         public bool Reviewed { get; set; }
