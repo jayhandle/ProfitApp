@@ -30,7 +30,7 @@ namespace ProfitLibrary
 
                 var order = new OrderItem();
                 order.BoughtFrom = "Ebay";
-                order.DateSold = transaction.Status.LastTimeModified.ToString("MM/dd/yyyy");
+                order.DateSold = transaction.CreatedDate.ToString("MM/dd/yyyy");
                 order.ItemName = transaction.Item.Title;
                 order.OrderID = transaction.ExtendedOrderID;
                 order.QuantitySold = transaction.QuantityPurchased;
