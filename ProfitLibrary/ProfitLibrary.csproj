@@ -66,6 +66,7 @@
     <Compile Include="EbayReportUpload.cs" />
     <Compile Include="AmazonReportUpload.cs" />
     <Compile Include="APICommerce\IAPICommerces.cs" />
+    <Compile Include="GraphData.cs" />
     <Compile Include="IDatabase.cs" />
     <Compile Include="IDBResult.cs" />
     <Compile Include="IProfitDatabase.cs" />
@@ -87,6 +88,7 @@
     <Compile Include="PaymentType\SubscriptionFee.cs" />
     <Compile Include="PaymentType\TransactionFee.cs" />
     <Compile Include="PayPalReportUpload.cs" />
+    <Compile Include="Point.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PaymentType\PromoRebates.cs" />
     <Compile Include="ProfitDatabase.cs" />

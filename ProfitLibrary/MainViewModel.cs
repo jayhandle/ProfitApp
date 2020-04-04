@@ -21,7 +21,6 @@ namespace ProfitLibrary
         private DateTime lastHitDate = DateTime.Now;
         private bool ebayWebBrowserIsVisible;
         private Uri getEbayAuthSource;
-
         public ObservableCollection<Item> ItemList
         {
             get => itemList;
@@ -267,6 +266,46 @@ namespace ProfitLibrary
 
                 OrderItems = new ObservableCollection<OrderItem>(newOrders);
             }
+        }
+
+        public GraphData ChartGraph(DateTime DateFrom, DateTime DateTo)
+        {
+
+            var xTicks = new List<string>();
+            
+            while(DateFrom.Month < DateTo.Month+1)
+            {
+                xTicks.Add(DateFrom.ToString("MMM"));
+                DateFrom = DateFrom.AddMonths(1);
+            }
+            var graphData = new GraphData 
+            {
+                XTicks = xTicks,
+                Points = new List<Point>()
+            };
+            long maxProfit = -10000;
+            foreach(var data in xTicks)
+            {
+                var items = OrderItems.Where(x => DateTime.Parse(x.DateSold).ToString("MMM") == data).ToList();
+                var point = new Point();
+                point.X = DateTime.Parse(items[0].DateSold).Month; 
+                long sumProfit = 0;
+                foreach(var item in items)
+                {
+                    sumProfit += item.Profit;
+                }
+                if(sumProfit> maxProfit)
+                {
+                    maxProfit = sumProfit;
+                }
+
+                point.Y = (double)(sumProfit/100);
+
+                graphData.Points.Add(point);
+            }
+
+            graphData.YTicks = maxProfit <= 0 ? 1 : maxProfit+1/100;
+            return graphData;
         }
 
         public bool HasEbayToken()

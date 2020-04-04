@@ -31,6 +31,7 @@ namespace ProfitApp
             ReportsGrid.Visibility = Visibility.Visible;
             ItemsGrid.Visibility = Visibility.Collapsed;
             SettingsGrid.Visibility = Visibility.Collapsed;
+            ChartGrid.Visibility = Visibility.Collapsed;
             vm = new MainViewModel();
             DataContext = vm;
 
@@ -90,6 +91,9 @@ namespace ProfitApp
             ReportsGrid.Visibility = Visibility.Visible;
             ItemsGrid.Visibility = Visibility.Collapsed;
             SettingsGrid.Visibility = Visibility.Collapsed;
+            ChartGrid.Visibility = Visibility.Collapsed;
+
+
         }
 
         private void Items_Click(object sender, RoutedEventArgs e)
@@ -98,6 +102,23 @@ namespace ProfitApp
             ReportsGrid.Visibility = Visibility.Collapsed;
             ItemsGrid.Visibility = Visibility.Visible;
             SettingsGrid.Visibility = Visibility.Collapsed;
+            ChartGrid.Visibility = Visibility.Collapsed;
+        }
+
+        private void Settings_Click(object sender, RoutedEventArgs e)
+        {
+            ReportsGrid.Visibility = Visibility.Collapsed;
+            ItemsGrid.Visibility = Visibility.Collapsed;
+            SettingsGrid.Visibility = Visibility.Visible;
+            ChartGrid.Visibility = Visibility.Collapsed;
+        }
+
+        private void ChartTab_Click(object sender, RoutedEventArgs e)
+        {
+            ReportsGrid.Visibility = Visibility.Collapsed;
+            ItemsGrid.Visibility = Visibility.Collapsed;
+            SettingsGrid.Visibility = Visibility.Collapsed;
+            ChartGrid.Visibility = Visibility.Visible;
         }
 
         private void ResetDataGrid()
@@ -201,13 +222,6 @@ namespace ProfitApp
             }
         }
 
-        private void Settings_Click(object sender, RoutedEventArgs e)
-        {
-            ReportsGrid.Visibility = Visibility.Collapsed;
-            ItemsGrid.Visibility = Visibility.Collapsed;
-            SettingsGrid.Visibility = Visibility.Visible;
-        }
-
         private void OpenDatabase_Click(object sender, RoutedEventArgs e)
         {
             vm.OpenDatabase();
@@ -245,6 +259,70 @@ namespace ProfitApp
             {
                 vm.GetEbayTransaction();
             }
+        }
+
+        private void ChartGraph_Click(object sender, RoutedEventArgs e)
+        {
+            var graphData = vm.ChartGraph(new DateTime(2020,1,1), new DateTime(2020, 4, 1));
+            ChartCanvas.Children.Clear();
+            var maxX = ChartCanvas.ActualWidth;
+            var maxY = ChartCanvas.ActualHeight+1;
+            var maxValueX = graphData.XTicks.Count;
+            var maxValueY = /*graphData.YTicks*/ 70;
+
+            var points = graphData.Points;
+
+            for (int i = 0; i < maxValueY; i++)
+            {
+                TextBlock textBlock = new TextBlock();
+                textBlock.Text = ((i + 1)*10).ToString();
+                textBlock.Foreground = Brushes.Black;
+                ChartCanvas.Children.Add(textBlock);
+                var xPos = /*(((double)i + 1) / maxValueX) * */ -10;
+                var yPos = (((double)(i + 1)*10) / maxValueY) * maxY;
+                Canvas.SetLeft(textBlock, xPos);
+                Canvas.SetTop(textBlock, maxY - yPos);
+            }
+
+            for (int i = 0; i < maxValueX; i++)
+            {
+                TextBlock textBlock = new TextBlock();
+                textBlock.Text = graphData.XTicks[i];
+                textBlock.Foreground = Brushes.Black;
+                ChartCanvas.Children.Add(textBlock);
+                var xPos = (((double)i+1) / maxValueX) * maxX;
+                var yPos = /*((double)1 / maxValueY) * */ maxY;
+                Canvas.SetLeft(textBlock, xPos);
+                Canvas.SetTop(textBlock, yPos);
+            }
+
+            PointCollection myPointCollection2 = new PointCollection();
+            var myPolyline = new Polyline();
+
+            foreach (var point in points)
+            {
+                var circlePoint = new Ellipse
+                {
+                    Width = 5,
+                    Height = 5,
+                    Fill = Brushes.Black,                  
+                };
+  
+                ChartCanvas.Children.Add(circlePoint);
+                var xPos = (point.X / maxValueX) * maxX;
+                var yPos = (point.Y / maxValueY) * maxY;
+                Canvas.SetLeft(circlePoint, xPos);
+                Canvas.SetTop(circlePoint, maxY - yPos);
+
+                myPolyline.Stroke = Brushes.SlateGray;
+                myPolyline.StrokeThickness = 2;
+                myPolyline.FillRule = FillRule.EvenOdd;
+                System.Windows.Point Point4 = new System.Windows.Point(xPos, maxY - yPos);
+                myPointCollection2.Add(Point4);
+                myPolyline.Points = myPointCollection2;
+            }
+            ChartCanvas.Children.Add(myPolyline);
+
         }
     }
 }

@@ -22,17 +22,45 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
             <Button Grid.Column="0"
-                Content="Report" Click="Reports_Click"/>
+                Content="Charts" Click="ChartTab_Click"/>
             <Button Grid.Column="1"
-                Content="Items" Click="Items_Click"/>
+                Content="Report" Click="Reports_Click"/>
             <Button Grid.Column="2"
+                Content="Items" Click="Items_Click"/>
+            <Button Grid.Column="3"
                 Content="  Setting  " Click="Settings_Click"/>
         </Grid>
         <Grid Grid.Row="1">
+            <Grid Name="ChartGrid">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <ComboBox Grid.Column="0" ItemsSource="{Binding ChartData}"/>
+                        <ComboBox Grid.Column="1" ItemsSource="{Binding ChartSubData}"/>
+                    </Grid>
+                    <Button Content="Chart Graph" Click="ChartGraph_Click"/>
+                    
+
+                </StackPanel>
+                
+                <Border Grid.Row="1" BorderThickness="1" Margin="50" BorderBrush="Black" >
+                    <Canvas Name="ChartCanvas"/>
+                </Border>    
+
+
+            </Grid>
             <Grid Name="ReportsGrid" d:IsHidden="True">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -139,7 +167,7 @@
                 <Button Grid.Row="3" 
                         Content="Save" Click="Save_Click"/>
             </Grid>
-            <Grid Name="SettingsGrid">
+            <Grid Name="SettingsGrid" d:IsHidden="True">
                 <StackPanel>
                     <GroupBox Header="Database Manager">
                         <StackPanel>
@@ -205,6 +233,7 @@
                     </GroupBox>
                 </StackPanel>
             </Grid>
+            
         </Grid>
         <Grid Grid.Row="2">
             <Button 
