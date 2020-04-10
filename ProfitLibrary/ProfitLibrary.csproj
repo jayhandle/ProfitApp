@@ -63,6 +63,7 @@
   <ItemGroup>
     <Compile Include="APICommerce\EbayCommerceAPI.cs" />
     <Compile Include="APICommerce\Transaction.cs" />
+    <Compile Include="ChartData.cs" />
     <Compile Include="EbayReportUpload.cs" />
     <Compile Include="AmazonReportUpload.cs" />
     <Compile Include="APICommerce\IAPICommerces.cs" />

@@ -21,6 +21,36 @@ namespace ProfitLibrary
         private DateTime lastHitDate = DateTime.Now;
         private bool ebayWebBrowserIsVisible;
         private Uri getEbayAuthSource;
+        private ObservableCollection<ChartData> chartDatas;
+        private ObservableCollection<string> chartInfo;
+        private ObservableCollection<string> chartFrom;
+        private ObservableCollection<string> chartTo;
+
+        public ObservableCollection<string> ChartInfo
+        {
+            get => chartInfo; set => chartInfo = value;
+        }
+
+        public ObservableCollection<string> ChartFrom
+        {
+            get => chartFrom; 
+            set 
+            { 
+                chartFrom = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public ObservableCollection<string> ChartTo
+        {
+            get => chartTo;
+            set 
+            { 
+                chartTo = value;
+                OnPropertyChanged();
+            }
+        }
+
         public ObservableCollection<Item> ItemList
         {
             get => itemList;
@@ -99,8 +129,8 @@ namespace ProfitLibrary
             }
         }
 
-        public Uri GetEbayAuthSource 
-        { 
+        public Uri GetEbayAuthSource
+        {
             get => getEbayAuthSource;
             set
             {
@@ -109,10 +139,23 @@ namespace ProfitLibrary
             }
         }
         public EbayCommerceAPI ClientAPI { get; private set; }
+        public ObservableCollection<ChartData> ChartDatas
+        {
+            get => chartDatas;
+            set
+            {
+                chartDatas = value;
+                OnPropertyChanged();
+            }
+        }
 
         public MainViewModel()
         {
             ItemList = new ObservableCollection<Item>();
+            var chartInfoList = new List<string> { "Total Profit by Month" };
+            ChartInfo = new ObservableCollection<string>(chartInfoList);
+            ChartFrom = new ObservableCollection<string>();
+            ChartTo = new ObservableCollection<string>();
         }
 
         public void GetReport()
@@ -254,7 +297,7 @@ namespace ProfitLibrary
         {
             if (OrderItems != null)
             {
-                var newOrders = new List<OrderItem> (OrderItems.ToList());
+                var newOrders = new List<OrderItem>(OrderItems.ToList());
                 foreach (var ebayTransaction in ebayTransactions)
                 {
                     if (!OrderItems.ToList().Exists(o => o.OrderID == ebayTransaction.Order.OrderID && o.BoughtFrom == ebayTransaction.Order.BoughtFrom))
@@ -270,42 +313,72 @@ namespace ProfitLibrary
 
         public GraphData ChartGraph(DateTime DateFrom, DateTime DateTo)
         {
-
             var xTicks = new List<string>();
-            
-            while(DateFrom.Month < DateTo.Month+1)
+            chartDatas = new ObservableCollection<ChartData>();
+            while (DateFrom.Month < DateTo.Month)
             {
                 xTicks.Add(DateFrom.ToString("MMM"));
                 DateFrom = DateFrom.AddMonths(1);
             }
-            var graphData = new GraphData 
+            var graphData = new GraphData
             {
                 XTicks = xTicks,
                 Points = new List<Point>()
             };
             long maxProfit = -10000;
-            foreach(var data in xTicks)
+            foreach (var data in xTicks)
             {
                 var items = OrderItems.Where(x => DateTime.Parse(x.DateSold).ToString("MMM") == data).ToList();
+
                 var point = new Point();
-                point.X = DateTime.Parse(items[0].DateSold).Month; 
+                point.X = DateTime.Parse(items[0].DateSold).Month;
                 long sumProfit = 0;
-                foreach(var item in items)
+                foreach (var item in items)
                 {
                     sumProfit += item.Profit;
                 }
-                if(sumProfit> maxProfit)
+                if (sumProfit > maxProfit)
                 {
                     maxProfit = sumProfit;
                 }
 
-                point.Y = (double)(sumProfit/100);
+                var chartData = new ChartData
+                {
+                    X = data,
+                    Y = PaymentDetail.ConvertPenniesToDollars(sumProfit),
+                };
+                chartDatas.Add(chartData);
+                point.Y = (double)(sumProfit / 100);
 
                 graphData.Points.Add(point);
             }
 
-            graphData.YTicks = maxProfit <= 0 ? 1 : maxProfit+1/100;
+            ChartDatas = chartDatas;
+            graphData.YTicks = maxProfit <= 0 ? 1 : maxProfit;
+            graphData.YTicks = Math.Round(graphData.YTicks / 100) + 1;
             return graphData;
+        }
+
+        public void ChartInfoSelectionChanged(string selectedChartInfo)
+        {
+            switch (selectedChartInfo)
+            {
+                case "Total Profit by Month":
+                    var fromList = new List<string>();
+                    var toList = new List<string>();
+
+                    for (int i = 0; i < 12; i++)
+                    {
+                        var date = new DateTime();
+                        date = date.AddMonths(i);
+                        fromList.Add(date.ToString("MMM"));
+                        toList.Add(date.ToString("MMM"));
+                    }
+
+                    ChartFrom = new ObservableCollection<string>(fromList);
+                    ChartTo = new ObservableCollection<string>(toList);
+                    break;
+            }
         }
 
         public bool HasEbayToken()

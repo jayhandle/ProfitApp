@@ -42,22 +42,41 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <StackPanel Grid.Row="0">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <ComboBox Grid.Column="0" ItemsSource="{Binding ChartData}"/>
-                        <ComboBox Grid.Column="1" ItemsSource="{Binding ChartSubData}"/>
-                    </Grid>
+                    <WrapPanel Name="ChartInfoPanel">
+                        <ComboBox ItemsSource="{Binding ChartInfo}" SelectionChanged="ChartInfo_SelectionChanged"/>
+                        <ComboBox Name="ChartFromComboBox" ItemsSource="{Binding ChartFrom}"/>
+                        <ComboBox Name="ChartToComboBox" ItemsSource="{Binding ChartTo}"/>
+                    </WrapPanel>
                     <Button Content="Chart Graph" Click="ChartGraph_Click"/>
                     
 
                 </StackPanel>
-                
-                <Border Grid.Row="1" BorderThickness="1" Margin="50" BorderBrush="Black" >
-                    <Canvas Name="ChartCanvas"/>
-                </Border>    
+                <Grid Grid.Row="1">
+                    <Grid>
+                        <TabControl > 
+                            <TabItem Header="Data">
+                                <DataGrid
+            x:Name="dataGridData"
+                  ItemsSource="{Binding ChartDatas}"
+                  IsReadOnly="False" AutoGenerateColumns="False"
+                          CellEditEnding="DataGridProfit_CellEditEnding">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="X" Binding="{Binding X}" IsReadOnly="True"/>
+                                        <DataGridTextColumn Header="Y" Binding="{Binding Y}" IsReadOnly="True"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </TabItem>
+                            <TabItem Header="Graphs">
+                                <Border  BorderThickness="1" Margin="50" BorderBrush="Black" >
+                                    <Canvas Name="ChartCanvas"/>
+                                </Border>
+                            </TabItem>
+                        </TabControl>
+                        
+                    </Grid>
+                   
+                </Grid>
+                   
 
 
             </Grid>

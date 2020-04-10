@@ -263,66 +263,80 @@ namespace ProfitApp
 
         private void ChartGraph_Click(object sender, RoutedEventArgs e)
         {
-            var graphData = vm.ChartGraph(new DateTime(2020,1,1), new DateTime(2020, 4, 1));
-            ChartCanvas.Children.Clear();
-            var maxX = ChartCanvas.ActualWidth;
-            var maxY = ChartCanvas.ActualHeight+1;
-            var maxValueX = graphData.XTicks.Count;
-            var maxValueY = /*graphData.YTicks*/ 70;
-
-            var points = graphData.Points;
-
-            for (int i = 0; i < maxValueY; i++)
+            try
             {
-                TextBlock textBlock = new TextBlock();
-                textBlock.Text = ((i + 1)*10).ToString();
-                textBlock.Foreground = Brushes.Black;
-                ChartCanvas.Children.Add(textBlock);
-                var xPos = /*(((double)i + 1) / maxValueX) * */ -10;
-                var yPos = (((double)(i + 1)*10) / maxValueY) * maxY;
-                Canvas.SetLeft(textBlock, xPos);
-                Canvas.SetTop(textBlock, maxY - yPos);
-            }
+                var fromDate = ChartFromComboBox.SelectedIndex+1;
+                var ToDate = ChartToComboBox.SelectedIndex+1;
+                var graphData = vm.ChartGraph(new DateTime(DateTime.Now.Year, fromDate, 1), new DateTime(DateTime.Now.Year, ToDate+1, 1));
+                ChartCanvas.Children.Clear();
+                var maxX = ChartCanvas.ActualWidth;
+                var maxY = ChartCanvas.ActualHeight + 1;
+                var maxValueX = graphData.XTicks.Count;
+                var maxValueY = graphData.YTicks;
+                var YTicks = Math.Round(maxY / maxValueY);
+                var points = graphData.Points;
 
-            for (int i = 0; i < maxValueX; i++)
-            {
-                TextBlock textBlock = new TextBlock();
-                textBlock.Text = graphData.XTicks[i];
-                textBlock.Foreground = Brushes.Black;
-                ChartCanvas.Children.Add(textBlock);
-                var xPos = (((double)i+1) / maxValueX) * maxX;
-                var yPos = /*((double)1 / maxValueY) * */ maxY;
-                Canvas.SetLeft(textBlock, xPos);
-                Canvas.SetTop(textBlock, yPos);
-            }
-
-            PointCollection myPointCollection2 = new PointCollection();
-            var myPolyline = new Polyline();
-
-            foreach (var point in points)
-            {
-                var circlePoint = new Ellipse
+                for (int i = 0; i < YTicks; i++)
                 {
-                    Width = 5,
-                    Height = 5,
-                    Fill = Brushes.Black,                  
-                };
-  
-                ChartCanvas.Children.Add(circlePoint);
-                var xPos = (point.X / maxValueX) * maxX;
-                var yPos = (point.Y / maxValueY) * maxY;
-                Canvas.SetLeft(circlePoint, xPos);
-                Canvas.SetTop(circlePoint, maxY - yPos);
+                    TextBlock textBlock = new TextBlock();
+                    textBlock.Text = Math.Round(((maxValueY / (YTicks - i)))).ToString();
+                    textBlock.Foreground = Brushes.Black;
+                    ChartCanvas.Children.Add(textBlock);
+                    var xPos = /*(((double)i + 1) / maxValueX) * */ -20;
+                    var yPos = (((double)(i + 1) * 10) / maxValueY) * maxY;
+                    Canvas.SetLeft(textBlock, xPos);
+                    var topPos = (maxY - (maxY * (double)((i + 1)/YTicks))) - 1;
+                    Canvas.SetTop(textBlock, topPos);
+                }
 
-                myPolyline.Stroke = Brushes.SlateGray;
-                myPolyline.StrokeThickness = 2;
-                myPolyline.FillRule = FillRule.EvenOdd;
-                System.Windows.Point Point4 = new System.Windows.Point(xPos, maxY - yPos);
-                myPointCollection2.Add(Point4);
-                myPolyline.Points = myPointCollection2;
+                for (int i = 0; i < maxValueX; i++)
+                {
+                    TextBlock textBlock = new TextBlock();
+                    textBlock.Text = graphData.XTicks[i];
+                    textBlock.Foreground = Brushes.Black;
+                    ChartCanvas.Children.Add(textBlock);
+                    var xPos = (((double)i + 1) / maxValueX) * maxX;
+                    var yPos = /*((double)1 / maxValueY) * */ maxY;
+                    Canvas.SetLeft(textBlock, xPos);
+                    Canvas.SetTop(textBlock, yPos);
+                }
+
+                PointCollection myPointCollection2 = new PointCollection();
+                var myPolyline = new Polyline();
+
+                foreach (var point in points)
+                {
+                    var circlePoint = new Ellipse
+                    {
+                        Width = 5,
+                        Height = 5,
+                        Fill = Brushes.Black,
+                    };
+
+                    ChartCanvas.Children.Add(circlePoint);
+                    var xPos = (point.X / maxValueX) * maxX;
+                    var yPos = (point.Y / maxValueY) * maxY;
+                    Canvas.SetLeft(circlePoint, xPos);
+                    Canvas.SetTop(circlePoint, maxY - yPos);
+
+                    myPolyline.Stroke = Brushes.SlateGray;
+                    myPolyline.StrokeThickness = 2;
+                    myPolyline.FillRule = FillRule.EvenOdd;
+                    System.Windows.Point Point4 = new System.Windows.Point(xPos, maxY - yPos);
+                    myPointCollection2.Add(Point4);
+                    myPolyline.Points = myPointCollection2;
+                }
+                ChartCanvas.Children.Add(myPolyline);
             }
-            ChartCanvas.Children.Add(myPolyline);
+            catch
+            {
 
+            }
+        }
+
+        private void ChartInfo_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            vm.ChartInfoSelectionChanged(e.AddedItems[0].ToString());
         }
     }
 }
