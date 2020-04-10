@@ -33,8 +33,26 @@ namespace ProfitApp
             SettingsGrid.Visibility = Visibility.Collapsed;
             ChartGrid.Visibility = Visibility.Collapsed;
             vm = new MainViewModel();
+            SetupSettings();
             DataContext = vm;
 
+        }
+
+        private void SetupSettings()
+        {
+            var databasePath = Properties.Settings.Default.databasePath;
+            var lastHitDate = Properties.Settings.Default.LastHitDateEbay;
+
+            if(!string.IsNullOrWhiteSpace(databasePath))
+            {
+                vm.DatabaseLocation = databasePath;
+                vm.OpenDatabase();
+            }
+
+            if(lastHitDate != DateTime.MinValue)
+            {
+                vm.LastHitDate = lastHitDate;
+            }
         }
 
         private void ProfitSearchFolders_Click(object sender, RoutedEventArgs e)
@@ -52,6 +70,7 @@ namespace ProfitApp
             if (fileDialog.ShowDialog() == true)
             {
                 vm.DatabaseLocation = fileDialog.FileName;
+                Properties.Settings.Default.databasePath = fileDialog.FileName;
             }
         }
 
@@ -225,6 +244,7 @@ namespace ProfitApp
         private void OpenDatabase_Click(object sender, RoutedEventArgs e)
         {
             vm.OpenDatabase();
+            Properties.Settings.Default.Save();
         }
 
         private void ImportEbayTransaction_Click(object sender, RoutedEventArgs e)
@@ -258,6 +278,8 @@ namespace ProfitApp
             if(vm.HasEbayToken())
             {
                 vm.GetEbayTransaction();
+                Properties.Settings.Default.LastHitDateEbay = DateTime.Now;
+                Properties.Settings.Default.Save();
             }
         }
 

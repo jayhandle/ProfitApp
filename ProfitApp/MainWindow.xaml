@@ -36,7 +36,7 @@
                 Content="  Setting  " Click="Settings_Click"/>
         </Grid>
         <Grid Grid.Row="1">
-            <Grid Name="ChartGrid">
+            <Grid Name="ChartGrid" d:IsHidden="True">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="*"/>
@@ -186,7 +186,7 @@
                 <Button Grid.Row="3" 
                         Content="Save" Click="Save_Click"/>
             </Grid>
-            <Grid Name="SettingsGrid" d:IsHidden="True">
+            <Grid Name="SettingsGrid">
                 <StackPanel>
                     <GroupBox Header="Database Manager">
                         <StackPanel>
