@@ -23,6 +23,10 @@ namespace ProfitLibrary
             if (value.Contains("."))
             {
                 cents = value.Split('.')[1];
+                if(cents.Length<2)
+                {
+                    cents += "0";
+                }
             }
             var longDollar = int.Parse(dollars) * 100;
             var negative = dollars.Contains("-");

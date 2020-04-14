@@ -23,19 +23,30 @@ namespace ProfitLibrary
             var profitTransactions = new List<Transaction>();
             foreach(var transaction in transactions)
             {
+                if(transaction.Item == null)
+                {
+                    continue;
+                }
+
                 var item = new Item();
                 item.EbaySKU = transaction.Item?.ItemID;
-                item.ItemCost = PaymentDetail.ConvertDollarstoPennies(transaction.Item.SellingStatus.CurrentPrice.value);
-                item.Name = transaction.Item.Title;
+                item.ItemCost = PaymentDetail.ConvertDollarstoPennies(transaction.Item?.SellingStatus.CurrentPrice.value);
+                item.Name = transaction.Item?.Title;
 
                 var order = new OrderItem();
                 order.BoughtFrom = "Ebay";
                 order.DateSold = transaction.CreatedDate.ToString("MM/dd/yyyy");
-                order.ItemName = transaction.Item.Title;
+                order.ItemName = transaction.Item?.Title;
                 order.OrderID = transaction.ExtendedOrderID;
                 order.QuantitySold = transaction.QuantityPurchased;
                 order.SalesTax = PaymentDetail.ConvertDollarstoPennies(transaction.Taxes.TotalTaxAmount.value);
-                order.SellingFees = PaymentDetail.ConvertDollarstoPennies(transaction.FinalValueFee.value) + PaymentDetail.ConvertDollarstoPennies(transaction.ExternalTransaction?.FeeOrCreditAmount.value);
+                var extTransaction = PaymentDetail.ConvertDollarstoPennies(transaction.ExternalTransaction?.FeeOrCreditAmount.value);
+                if (extTransaction <= 0)
+                {
+                    extTransaction = PaymentDetail.ConvertDollarstoPennies(transaction.MonetaryDetails?.Payments[0].FeeOrCreditAmount.value);
+                }
+
+                order.SellingFees = PaymentDetail.ConvertDollarstoPennies(transaction.FinalValueFee.value) + extTransaction;
                 order.SoldFor = PaymentDetail.ConvertDollarstoPennies(transaction.AmountPaid.value);
 
                 var t = new Transaction
