@@ -48,7 +48,7 @@ namespace ProfitLibrary
 
                 order.SellingFees = PaymentDetail.ConvertDollarstoPennies(transaction.FinalValueFee.value) + extTransaction;
                 order.SoldFor = PaymentDetail.ConvertDollarstoPennies(transaction.AmountPaid.value);
-
+                order.SKU = string.IsNullOrWhiteSpace(item.SKU) ? item.EbaySKU : item.SKU;
                 var t = new Transaction
                 {
                     Item = item,
@@ -62,12 +62,14 @@ namespace ProfitLibrary
 
         internal Uri GetEbayAuthSource()
         {
-            return new Uri(ebayAPI.GetSessionID());
+            ebayAPI.GetSessionID();
+            return new Uri(ebayAPI.FetchToken());
         }
 
         internal bool GetAccessToken(Uri uri)
         {
-            return ebayAPI.GetAccessToken(uri.AbsoluteUri);
+            var token = ebayAPI.GetAccessToken(uri.AbsoluteUri);     
+            return string.IsNullOrEmpty(token?.AccessToken);
         }
 
         internal bool HasAccessToken()

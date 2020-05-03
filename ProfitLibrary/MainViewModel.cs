@@ -414,7 +414,7 @@ namespace ProfitLibrary
                         //}
                     }
 
-                    x.Profit = (x.SoldFor * x.QuantitySold) + x.ItemCost + x.SellingFees + x.ShippingCost;
+                    x.Profit = x.SoldFor + x.ItemCost + x.SellingFees + x.ShippingCost;
                     ProfitDB.Update("Orders", x.ID, "profit", x.Profit.ToString());
                     x.Assigned = true;
                     ProfitDB.Update("Orders", x.ID, "assigned", x.Assigned.ToString());
@@ -475,6 +475,15 @@ namespace ProfitLibrary
                     }
 
                     break;
+                case "Quantity Sold":
+                    var itemCost = orderItems[orderItems.IndexOf(selectedOrderItem)].ItemCost;
+                    if(int.TryParse(value, out int soldNum ))
+                    {
+                        itemCost *= soldNum;
+                    }
+
+                    orderItems[orderItems.IndexOf(selectedOrderItem)].ItemCost = itemCost;
+                    break;
                 case "Item Cost":
                     orderItems[orderItems.IndexOf(selectedOrderItem)].ItemCost = PaymentDetail.ConvertDollarstoPennies(value);
                     break;
@@ -488,7 +497,7 @@ namespace ProfitLibrary
                     }
                     break;
                 case "Selling Fees":
-                    orderItems[orderItems.IndexOf(selectedOrderItem)].SellingFees = PaymentDetail.ConvertDollarstoPennies(value);
+                    orderItems[orderItems.IndexOf(selectedOrderItem)].SellingFees = -PaymentDetail.ConvertDollarstoPennies(value);
                     break;
                 default:
                     break;

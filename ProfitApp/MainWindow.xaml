@@ -239,13 +239,13 @@
                                         <DatePicker Grid.Column="1" SelectedDate="{Binding LastHitDate}"/>
                                     </Grid>
                                     <Button Content="Import Transactions" Click="ImportEbayTransaction_Click"/>
-                                    <StackPanel>
+                                    <Grid>
                                         <cefSharp:ChromiumWebBrowser x:Name="EbayWebBrowser" 
                                                     Loaded="EbayWebBrowser_Loaded"
                                                                      LoadingStateChanged="EbayWebBrowser_LoadingStateChanged"
                                                     Visibility="{Binding EbayWebBrowserIsVisible , Converter={StaticResource BoolToVisibilityConverter}}"
                                                                      Height="200"/>
-                                    </StackPanel>
+                                    </Grid>
                                 </StackPanel>
                             </GroupBox>
                         </StackPanel>
