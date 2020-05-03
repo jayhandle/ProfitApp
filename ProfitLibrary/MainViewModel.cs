@@ -333,9 +333,11 @@ namespace ProfitLibrary
                 var point = new Point();
                 point.X = DateTime.Parse(items[0].DateSold).Month;
                 long sumProfit = 0;
+                long sumGrossProfit = 0;
                 foreach (var item in items)
                 {
                     sumProfit += item.Profit;
+                    sumGrossProfit += item.SoldFor;
                 }
                 if (sumProfit > maxProfit)
                 {
@@ -346,6 +348,7 @@ namespace ProfitLibrary
                 {
                     X = data,
                     Y = PaymentDetail.ConvertPenniesToDollars(sumProfit),
+                    Z = PaymentDetail.ConvertPenniesToDollars(sumGrossProfit),
                 };
                 chartDatas.Add(chartData);
                 point.Y = (double)(sumProfit / 100);

@@ -36,7 +36,7 @@
                 Content="  Setting  " Click="Settings_Click"/>
         </Grid>
         <Grid Grid.Row="1">
-            <Grid Name="ChartGrid" d:IsHidden="True">
+            <Grid Name="ChartGrid">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="*"/>
@@ -61,8 +61,9 @@
                   IsReadOnly="False" AutoGenerateColumns="False"
                           CellEditEnding="DataGridProfit_CellEditEnding">
                                     <DataGrid.Columns>
-                                        <DataGridTextColumn Header="X" Binding="{Binding X}" IsReadOnly="True"/>
-                                        <DataGridTextColumn Header="Y" Binding="{Binding Y}" IsReadOnly="True"/>
+                                        <DataGridTextColumn Header="Month" Binding="{Binding X}" IsReadOnly="True"/>
+                                        <DataGridTextColumn Header="Net" Binding="{Binding Y}" IsReadOnly="True"/>
+                                        <DataGridTextColumn Header="Gross" Binding="{Binding Z}" IsReadOnly="True"/>
                                     </DataGrid.Columns>
                                 </DataGrid>
                             </TabItem>
@@ -186,7 +187,7 @@
                 <Button Grid.Row="3" 
                         Content="Save" Click="Save_Click"/>
             </Grid>
-            <Grid Name="SettingsGrid">
+            <Grid Name="SettingsGrid" d:IsHidden="True">
                 <StackPanel>
                     <GroupBox Header="Database Manager">
                         <StackPanel>
