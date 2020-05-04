@@ -63,7 +63,7 @@ namespace ProfitLibrary
 
                         itemList.Add(item);
                     }
-                    catch
+                    catch(Exception ex)
                     {
                         break;
                     }                   

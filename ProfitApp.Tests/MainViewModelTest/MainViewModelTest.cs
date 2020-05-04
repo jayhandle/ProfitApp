@@ -33,8 +33,8 @@ namespace ProfitLibrary.Test
         [TestCaseSource(typeof(MainViewModelData), "ItemAndOrderDatas")]
         public void AutoCreateItems(MainViewModelData.ItemAndOrderData data)
         {
-            vm.ItemList = data.ItemList;
-            vm.OrderItems = data.OrderItemList;
+            vm.ItemList = new System.Collections.ObjectModel.ObservableCollection<Item>(data.ItemList?? new List<Item>());
+            vm.OrderItems = new System.Collections.ObjectModel.ObservableCollection<OrderItem>(data.OrderItemList?? new List<OrderItem>());
             vm.AutoCreateItems();
             Assert.AreEqual(data.ItemListCount, vm.ItemList.Count, data.Title);
         }
@@ -42,7 +42,7 @@ namespace ProfitLibrary.Test
         [TestCaseSource(typeof(MainViewModelData), "ItemAndOrderDatas")]
         public void DeletedItemsFromItemList(MainViewModelData.ItemAndOrderData data)
         {
-            vm.ItemList = new List<Item>(data.ItemList?? new List<Item>());
+            vm.ItemList = new System.Collections.ObjectModel.ObservableCollection<Item>(new List<Item>(data.ItemList?? new List<Item>()));
             vm.DeletedItemsFromItemList(data.ItemList);
             if (vm.ItemList != null)
             {
@@ -53,6 +53,8 @@ namespace ProfitLibrary.Test
         [Test]
         public void EditItemListItem()
         {
+            Mocks.SetupMocks();
+            vm.ProfitDB = Mocks.mockProfitDB.Object;
             var item = new Item
             {
                 SKU="0",
@@ -66,7 +68,7 @@ namespace ProfitLibrary.Test
 
             var ItemList = new List<Item>();
             ItemList.Add(item);
-            vm.ItemList = ItemList;
+            vm.ItemList = new System.Collections.ObjectModel.ObservableCollection<Item>(ItemList);
             vm.EditItemListItem(item, "SKU", "1");
             vm.EditItemListItem(item, "Name", "item2");
             vm.EditItemListItem(item, "Amazon SKU", "A2");

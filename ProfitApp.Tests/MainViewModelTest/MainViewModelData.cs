@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 namespace ProfitLibrary.Test
 {
     public class MainViewModelData
     {
+        private static string pathRoot = @"C:\Users\sonov\Dropbox\samples\ProfitApp\ProfitApp\ProfitApp.Tests\Data\";
         public struct GetReportData
         {
             public string ItemListLocation;
@@ -26,24 +28,24 @@ namespace ProfitLibrary.Test
             new GetReportData
             {
                 Title = "Item Only",
-                ItemListLocation =@"C:\Users\juchendu\source\repos\ProfitApp\ProfitApp.Tests\Data\items.txt",
+                ItemListLocation = pathRoot + "items.txt",
                 ItemListCount= 12
             },          
             //AmazonReport
             new GetReportData
             {
                 Title = "Amazon Only",
-                AmazonReportLocation = @"C:\Users\juchendu\source\repos\ProfitApp\ProfitApp.Tests\Data\Test.txt",
-                OrderItemsCount= 20
+                AmazonReportLocation = pathRoot + "Test.txt",
+                OrderItemsCount= 0// Amazon has been removed
             },
             //AmazonReport and Item
             new GetReportData
             {
                 Title = "Item and Amazon",
-                ItemListLocation =@"C:\Users\juchendu\source\repos\ProfitApp\ProfitApp.Tests\Data\items.txt",
-                AmazonReportLocation = @"C:\Users\juchendu\source\repos\ProfitApp\ProfitApp.Tests\Data\Test.txt",
-                OrderItemsCount= 20,
-                ItemListCount= 12
+                ItemListLocation =pathRoot + "items.txt",
+                AmazonReportLocation = pathRoot + "Test.txt",
+                OrderItemsCount= 0, // Amazon has been removed
+                ItemListCount= 12,
             },
         };
 

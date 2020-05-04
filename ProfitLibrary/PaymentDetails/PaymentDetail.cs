@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Text.RegularExpressions;
 
 namespace ProfitLibrary
 {
@@ -10,7 +11,7 @@ namespace ProfitLibrary
 
         public static long ConvertDollarstoPennies(string value)
         {
-            if(string.IsNullOrWhiteSpace(value))
+            if(string.IsNullOrWhiteSpace(value) || !IsNumber(value))
             {
                 return 0;
             }
@@ -38,6 +39,12 @@ namespace ProfitLibrary
             var longCent = int.Parse(cents);
             var pennies = longDollar + longCent;
             return pennies = negative ? MakeNegative(pennies): pennies;
+        }
+
+        private static bool IsNumber(string value)
+        {
+            Regex regex = new Regex(@"\d+(,\d{1,2})?");
+            return regex.IsMatch(value);
         }
 
         private static int MakeNegative(int pennies)
