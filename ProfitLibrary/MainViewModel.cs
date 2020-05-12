@@ -495,7 +495,10 @@ namespace ProfitLibrary
                     if (orderItems[orderItems.IndexOf(selectedOrderItem)].BoughtFrom == "Ebay")
                     {
                         var soldfor = orderItems[orderItems.IndexOf(selectedOrderItem)].SoldFor;
-                        value = GetEbayFee(soldfor.ToString());
+                        if (string.IsNullOrWhiteSpace(value))
+                        {
+                            value = GetEbayFee(soldfor.ToString());
+                        }
                         orderItems[orderItems.IndexOf(selectedOrderItem)].SellingFees = -PaymentDetail.ConvertDollarstoPennies(value);
                     }
                     break;
