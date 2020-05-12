@@ -76,6 +76,7 @@ namespace ProfitLibrary.Test
             vm.EditItemListItem(item, "Ebay SKU", "E2");
             vm.EditItemListItem(item, "Quantity Bought", "2");
             vm.EditItemListItem(item, "Quantity Sold", "2");
+            Assert.AreEqual(1, vm.ItemList[0].ID);
             Assert.AreEqual("1", vm.ItemList[0].SKU);
             Assert.AreEqual("item2", vm.ItemList[0].Name);
             Assert.AreEqual("A2", vm.ItemList[0].AmazonSKU);

@@ -148,7 +148,7 @@
                 <!--<Button Grid.Row="3"
                 Content="Save Profit" Click="SaveProfit_Click"/>-->
             </Grid>
-            <Grid Name ="ItemsGrid" d:IsHidden="True">
+            <Grid Name ="ItemsGrid">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -187,7 +187,7 @@
                 <Button Grid.Row="3" 
                         Content="Save" Click="Save_Click"/>
             </Grid>
-            <Grid Name="SettingsGrid">
+            <Grid Name="SettingsGrid" d:IsHidden="True">
                 <StackPanel>
                     <GroupBox Header="Database Manager">
                         <StackPanel>

@@ -610,7 +610,7 @@ namespace ProfitLibrary
                 var response = ProfitDB.InsertItem(selectedItem);
                 if (response == "SUCCESS")
                 {
-                    selectedItem.ID = ItemList.Count() - 1;
+                    selectedItem.ID = ItemList.Count();
                 }
             }
 
