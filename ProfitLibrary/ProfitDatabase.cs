@@ -277,6 +277,9 @@ namespace ProfitLibrary
                 case "Quantity Bought":
                     column = "quantity_bought";
                     break;
+                case "Ebay SKU":
+                    column = "ebay_sku";
+                    break;
                 case "Item Cost":
                     column = "item_cost";
                     value = PaymentDetail.ConvertDollarstoPennies(value).ToString();

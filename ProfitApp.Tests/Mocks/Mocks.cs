@@ -15,8 +15,9 @@ namespace ProfitLibrary.Test
         {
             SetupProfitDB();
         }
-        private static List<Item> ItemTable;
-        private static List<OrderItem> OrderItemsTable;
+
+        public static List<Item> ItemTable;
+        public static List<OrderItem> OrderItemsTable;
         private static void SetupProfitDB()
         {
             ItemTable = new List<Item>();

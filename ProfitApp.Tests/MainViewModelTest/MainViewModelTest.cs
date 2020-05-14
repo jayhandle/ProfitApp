@@ -84,6 +84,7 @@ namespace ProfitLibrary.Test
             Assert.AreEqual(2, vm.ItemList[0].QuantityBought);
             Assert.AreEqual(2, vm.ItemList[0].QuantitySold);
             Assert.AreEqual(1100, vm.ItemList[0].ItemCost);
+            Assert.AreEqual("E2", Mocks.ItemTable.Find(x => x.SKU == "1").EbaySKU);
         }
     }
 }
