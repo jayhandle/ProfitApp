@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Data.SQLite;
 using System.IO;
 
-namespace ProfitLibrary
+namespace EmJayLib
 {
     public class SQLiteDatabase : IDatabase
     {

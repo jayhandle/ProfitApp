@@ -34,6 +34,7 @@ namespace ProfitLibrary
         public long SellingFees { get; set; }      
         public long Profit { get; set; }
         public long SalesTax { get; set; }
+        public string TransID { get; set; }
 
         internal static List<OrderItem> GetOrderItemList(string file)
         {

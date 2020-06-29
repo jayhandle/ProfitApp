@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace ProfitLibrary
+namespace EmJayLib
 {
     public interface IDBResult
     {

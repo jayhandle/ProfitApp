@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 
-namespace ProfitLibrary
+namespace EmJayLib
 {
     public interface IDatabase
     {

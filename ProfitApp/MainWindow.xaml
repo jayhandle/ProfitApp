@@ -184,8 +184,8 @@
                         <DataGridTextColumn Header="Profit" Binding="{Binding Profit, Converter={StaticResource PenniesToDollarsConverter}}" IsReadOnly="True"/>
                     </DataGrid.Columns>
                 </DataGrid>
-                <Button Grid.Row="3" 
-                        Content="Save" Click="Save_Click"/>
+                <!--<Button Grid.Row="3" 
+                        Content="Save" Click="Save_Click"/>-->
             </Grid>
             <Grid Name="SettingsGrid" d:IsHidden="True">
                 <StackPanel>
@@ -231,6 +231,36 @@
                             <Button Content="Import" Click="UploadReport_Click"/>
                             <GroupBox Header="Ebay Transactions">
                                 <StackPanel>
+                                    <GroupBox Header="Order Report">
+                                        <Grid>
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="auto"/>
+                                                    <RowDefinition Height="auto"/>
+                                                </Grid.RowDefinitions>
+                                                
+                                                <Grid Grid.Row="0">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="auto"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="auto"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <Grid Grid.Column="0">
+                                                        <Label Content="Location"/>
+                                                    </Grid>
+                                                    <Grid Grid.Column="1">
+                                                        <TextBox x:Name="ebayOrderReportTextbox"/>
+                                                    </Grid>
+                                                    <Grid Grid.Column="3">
+                                                        <Button Content="Search Report" Click="SearchReportButton_Click"/>
+                                                    </Grid>
+                                                </Grid>
+                                                <Grid Grid.Row="1">
+                                                    <Button Content= "Import Report" Click="ImportReportButton_Click"/>
+                                                </Grid>
+                                            </Grid>
+                                        </Grid>
+                                    </GroupBox>
                                     <Grid>
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="Auto"/>

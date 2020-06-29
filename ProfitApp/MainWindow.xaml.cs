@@ -360,5 +360,20 @@ namespace ProfitApp
         {
             vm.ChartInfoSelectionChanged(e.AddedItems[0].ToString());
         }
+
+        private void ImportReportButton_Click(object sender, RoutedEventArgs e)
+        {        
+            var reportfilelocation = ebayOrderReportTextbox.Text;
+            vm.ImportEbayOrderReport(reportfilelocation);
+        }
+
+        private void SearchReportButton_Click(object sender, RoutedEventArgs e)
+        {
+            var fileDialog = new OpenFileDialog();
+            if (fileDialog.ShowDialog() == true)
+            {
+                ebayOrderReportTextbox.Text = fileDialog.FileName;
+            }
+        }
     }
 }

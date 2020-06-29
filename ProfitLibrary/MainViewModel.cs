@@ -384,6 +384,41 @@ namespace ProfitLibrary
             }
         }
 
+        public void ImportEbayOrderReport(string reportfilelocation)
+        {
+            var temporderitems= EbayReportUpload.GetOrderReport(reportfilelocation);
+            temporderitems = CompareEbayOrderReportWithDatabaseOrderItems(temporderitems);
+            if (temporderitems?.Count == 0)
+            { return; }
+            temporderitems = ClientAPI.GetTransactions(temporderitems);
+            foreach(var tempOrderItem in temporderitems)
+            {
+                orderItems.Add(tempOrderItem);
+                ProfitDB.InsertOrder(tempOrderItem);
+            }
+
+            OrderItems = orderItems;
+        }
+
+        private List<OrderItem> CompareEbayOrderReportWithDatabaseOrderItems(List<OrderItem> temporderitems)
+        {
+            if (OrderItems != null)
+            {
+                var newOrders = new List<OrderItem>();
+                foreach (var orderitem in temporderitems)
+                {
+                    if (!OrderItems.ToList().Exists(o => o.OrderID == orderitem.OrderID && o.BoughtFrom == orderitem.BoughtFrom))
+                    {
+                        newOrders.Add(orderitem);
+                    }
+                }
+
+                return newOrders;
+            }
+
+            return null;
+        }
+
         public bool HasEbayToken()
         {
             return ClientAPI.HasAccessToken();
@@ -402,7 +437,7 @@ namespace ProfitLibrary
                             if (x.SKU == item.SKU || x.SKU == item.AmazonSKU || x.SKU == item.EbaySKU)
                             {
                                 x.ItemCost = -item.ItemCost;
-                                x.ItemName = item.Name;
+                                //x.ItemName = item.Name;
                                 break;
                             }
                         }
@@ -473,7 +508,12 @@ namespace ProfitLibrary
                     var item = ItemList.FirstOrDefault(x => x.AmazonSKU == value || x.EbaySKU == value || x.SKU == value);
                     if (item != null)
                     {
-                        orderItems[orderItems.IndexOf(selectedOrderItem)].ItemName = item.Name;
+                        var name = orderItems[orderItems.IndexOf(selectedOrderItem)].ItemName;
+                        if(string.IsNullOrWhiteSpace(name))
+                        {
+                            orderItems[orderItems.IndexOf(selectedOrderItem)].ItemName = item.Name;
+                        }
+                        
                         orderItems[orderItems.IndexOf(selectedOrderItem)].ItemCost = -item.ItemCost;
                     }
 
@@ -488,22 +528,30 @@ namespace ProfitLibrary
                     orderItems[orderItems.IndexOf(selectedOrderItem)].ItemCost = itemCost;
                     break;
                 case "Item Cost":
-                    orderItems[orderItems.IndexOf(selectedOrderItem)].ItemCost = PaymentDetail.ConvertDollarstoPennies(value);
+                    orderItems[orderItems.IndexOf(selectedOrderItem)].ItemCost = -Math.Abs(PaymentDetail.ConvertDollarstoPennies(value));
+                    value = PaymentDetail.ConvertPenniesToDollars(orderItems[orderItems.IndexOf(selectedOrderItem)].ItemCost);
+
                     break;
                 case "Bought From":
                 case "Sold For":
                     if (orderItems[orderItems.IndexOf(selectedOrderItem)].BoughtFrom == "Ebay")
                     {
                         var soldfor = orderItems[orderItems.IndexOf(selectedOrderItem)].SoldFor;
-                        if (string.IsNullOrWhiteSpace(value))
+                        var sellingFee = orderItems[orderItems.IndexOf(selectedOrderItem)].SellingFees;
+                        if (string.IsNullOrWhiteSpace(value) && sellingFee == 0)
                         {
                             value = GetEbayFee(soldfor.ToString());
+                            orderItems[orderItems.IndexOf(selectedOrderItem)].SellingFees = -PaymentDetail.ConvertDollarstoPennies(value);
                         }
-                        orderItems[orderItems.IndexOf(selectedOrderItem)].SellingFees = -PaymentDetail.ConvertDollarstoPennies(value);
                     }
                     break;
                 case "Selling Fees":
-                    orderItems[orderItems.IndexOf(selectedOrderItem)].SellingFees = -PaymentDetail.ConvertDollarstoPennies(value);
+                    orderItems[orderItems.IndexOf(selectedOrderItem)].SellingFees = -Math.Abs(PaymentDetail.ConvertDollarstoPennies(value));
+                    value = PaymentDetail.ConvertPenniesToDollars(orderItems[orderItems.IndexOf(selectedOrderItem)].SellingFees);
+                    break;
+                case "Shipping Cost":
+                    orderItems[orderItems.IndexOf(selectedOrderItem)].ShippingCost = PaymentDetail.ConvertDollarstoPennies(value);
+                    value = PaymentDetail.ConvertPenniesToDollars(orderItems[orderItems.IndexOf(selectedOrderItem)].ShippingCost);
                     break;
                 default:
                     break;
@@ -579,7 +627,7 @@ namespace ProfitLibrary
                     itemList[itemList.IndexOf(selectedItem)].SKU = value;
                     break;
                 case "Name":
-                    itemList[itemList.IndexOf(selectedItem)].Name = value;
+                    itemList[itemList.IndexOf(selectedItem)].Name = value;                    
                     break;
                 case "Item Cost":
                     itemList[itemList.IndexOf(selectedItem)].ItemCost = PaymentDetail.ConvertDollarstoPennies(value);

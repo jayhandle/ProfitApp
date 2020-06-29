@@ -1,4 +1,4 @@
-﻿namespace ProfitLibrary
+﻿namespace EmJayLib
 {
     public class SQLiteResult : IDBResult
     {

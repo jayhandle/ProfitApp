@@ -86,5 +86,11 @@ namespace ProfitLibrary.Test
             Assert.AreEqual(1100, vm.ItemList[0].ItemCost);
             Assert.AreEqual("E2", Mocks.ItemTable.Find(x => x.SKU == "1").EbaySKU);
         }
+
+        [Test]
+        public void ImportEbayOrderReport()
+        {
+            vm.ImportEbayOrderReport(@"C:\Users\sonov\Dropbox\samples\ProfitApp\ProfitApp\ProfitApp.Tests\Data\"+ "eBay-OrdersReport-Jun-03-2020-17_57_51-0700-122310061.csv");
+        }
     }
 }

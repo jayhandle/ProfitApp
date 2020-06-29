@@ -60,6 +60,28 @@ namespace ProfitLibrary
             return profitTransactions;
         }
 
+        internal List<OrderItem> GetTransactions(List<OrderItem> orderItems)
+        {
+            var orderIDs = new List<string>();
+            foreach(var orderitem in orderItems)
+            {
+                if(string.IsNullOrEmpty(orderitem.SKU))
+                {
+                    continue;
+                }
+                var orderID = $"{orderitem.SKU}-{(string.IsNullOrEmpty(orderitem.TransID)?"0":orderitem.TransID)}";
+                orderIDs.Add(orderID);
+            }
+            var orders = ebayAPI.GetOrders(orderIDs);
+            var tempOrderItems = new List<OrderItem>();
+            foreach(var order in orders)
+            {
+                var o = orderItems.Find(x => x.SKU == order.Item.ItemID);
+                o.SellingFees = -PaymentDetail.ConvertDollarstoPennies(order.FinalValueFee.value);
+                tempOrderItems.Add(o);
+            }
+            return tempOrderItems;
+        }
         internal Uri GetEbayAuthSource()
         {
             ebayAPI.GetSessionID();

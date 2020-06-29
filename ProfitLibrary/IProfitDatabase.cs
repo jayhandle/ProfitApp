@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using EmJayLib;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 namespace ProfitLibrary
